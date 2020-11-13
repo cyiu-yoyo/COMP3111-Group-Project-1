@@ -5,6 +5,7 @@ package comp3111.popnames;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -47,9 +48,30 @@ public class Controller {
 
     @FXML
     private Tab tabReport2;
+    
+    @FXML
+    private TextArea task2report;
+
+    @FXML
+    private TextField task2name;
+
+    @FXML
+    private RadioButton task2male;
 
     @FXML
     private ToggleGroup T11;
+
+    @FXML
+    private RadioButton task2female;
+
+    @FXML
+    private TextField task2y2;
+
+    @FXML
+    private TextField task2y1;
+
+    @FXML
+    private Button buttomTask2;
 
     @FXML
     private Tab tabReport3;
@@ -154,6 +176,27 @@ public class Controller {
     	textAreaConsole.setText(oReport);
     }
     
-
+    /**
+     *Task Two
+     *
+    */
+    @FXML
+    void getReport2() {
+    	int year1=Integer.parseInt(task2y1.getText());
+    	int year2=Integer.parseInt(task2y2.getText());
+    	String name=task2name.getText();
+    	String gender="";
+    	if(task2male.isSelected())
+    	{
+    		gender="M";
+    	}
+    	else {
+    		gender="F";
+    	}
+    	String Report=PopularityofName.getReport(year1, year2, name, gender);
+    	//String Report="";
+    	//Report+=String.format("%d %d %s %s", year1, year2, name, gender);
+    	task2report.setText(Report);
+    }
 }
 
