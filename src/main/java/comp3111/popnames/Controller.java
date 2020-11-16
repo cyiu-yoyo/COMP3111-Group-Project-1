@@ -102,6 +102,28 @@ public class Controller {
 
     @FXML
     private Tab tabApp1;
+    
+    @FXML
+    private TextArea App1Report;
+    
+    @FXML
+    private TextField task4DadName;
+    
+    @FXML
+    private TextField task4MomName;
+    
+    @FXML
+    private TextField task4DadYOB;
+    
+    @FXML
+    private TextField task4MomYOB;
+    
+    @FXML
+    private TextField task4VintageYear;
+    
+    @FXML
+    private Button buttonTask4;
+    
 
     @FXML
     private Tab tabApp2;
@@ -203,6 +225,12 @@ public class Controller {
     */
     @FXML
     void getReport1() {
+    	String Report;
+    	if(task1y1.getText().equals("") || task1y2.getText().equals("") ||task1TopNum.getText().equals("")) {
+    		Report = "Something is missed and please ensure you have finished your input!";
+    		textAreaConsole.setText(Report);
+    		return;
+    	}
     	int year1=Integer.parseInt(task1y1.getText());
     	int year2=Integer.parseInt(task1y2.getText());
     	int num=Integer.parseInt(task1TopNum.getText());
@@ -213,9 +241,10 @@ public class Controller {
     	else{
     		gender="F";
     	}
-    	//String Report = gender;
-    	String Report=TopNamesForBirth.getReport1(year1, year2, num, gender);
+    	//String Report = String.format("no year %d %d",year1,year2);
+    	Report=TopNamesForBirth.getReport1(year1, year2, num, gender);
     	textAreaConsole.setText(Report);
+    	return;
     }
     
     /**
@@ -240,4 +269,13 @@ public class Controller {
     	//Report+=String.format("%d %d %s %s", year1, year2, name, gender);
     	textAreaConsole.setText(Report);
     }
+    /**
+     *Task Two
+     *
+    */
+    @FXML
+    void getNameRecommendation() {
+    
+    }
 }
+	
