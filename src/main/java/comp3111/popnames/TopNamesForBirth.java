@@ -72,7 +72,7 @@ public class TopNamesForBirth {
 	
 	public static String getReport1(int year1, int year2, int num, String gender) {
 		int range = year2 - year1 + 1;
-		if(range < 1) {
+		if(range < 1 || year1 < 1880 || year2 > 2019) {
 			return "the range is illegal, please type again!";
 		}
 		boolean inrange = checkInRange(year1,year2,num,gender);
@@ -83,13 +83,13 @@ public class TopNamesForBirth {
 		String Names[][]=getNames(year1,year2,num,gender);
 		int times = 0;
 		String TopName = "";
-		int threshold = -1;
-		if(range % 2 == 0) {
-			 threshold = range/2;
-		}
-		else {
-			 threshold = (range+1)/2;
-		}
+//		int threshold = -1;
+//		if(range % 2 == 0) {
+//			 threshold = range/2;
+//		}
+//		else {
+//			 threshold = (range+1)/2;
+//		}
 		int arr[] = new int[range];
 		for(int i = 0; i < range; ++i) {
 			arr[i] = 1;

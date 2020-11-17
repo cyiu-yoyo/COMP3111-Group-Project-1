@@ -270,12 +270,30 @@ public class Controller {
     	textAreaConsole.setText(Report);
     }
     /**
-     *Task Two
+     *Task Four
      *
     */
     @FXML
     void getNameRecommendation() {
-    
+    	String Report;
+    	if(task4DadName.getText().equals("") || task4MomName.getText().equals("") ||task4DadYOB.getText().equals("") || task4MomYOB.getText().equals("")) {
+    		Report = "Something is missed and please ensure you have finished your input!";
+    		textAreaConsole.setText(Report);
+    		return; //empty input situation.
+    	}
+    	int Dadyear = Integer.parseInt(task4DadYOB.getText());
+    	int Momyear = Integer.parseInt(task4MomYOB.getText());
+    	String Dadname = task4DadName.getText();
+    	String Momname = task4MomName.getText();
+    	int VinYear;
+    	if(task4VintageYear.getText().equals("")) {
+    		VinYear = 2019;
+    	}
+    	else {
+    		VinYear = Integer.parseInt(task4VintageYear.getText());
+    	}
+    	Report = NameRecommendation.getBabyName(Dadyear, Momyear, Dadname,Momname, VinYear);
+    	textAreaConsole.setText(Report);
     }
 }
 	
