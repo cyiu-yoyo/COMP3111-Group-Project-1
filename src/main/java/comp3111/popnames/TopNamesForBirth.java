@@ -115,17 +115,17 @@ public class TopNamesForBirth {
 		String Gender = "";
 		if(gender == "M") {Gender = "male";}
 		else {Gender = "female";}
-		report+=String.format("Over the period %s to %s, the name \" %s \" for %s has hold the top spot most often for a total of %d times. \n\n"
+		report+=String.format("Over the period %s to %s, the name \"%s\" for %s has hold the top spot most often for a total of %d times. \n\n"
 				, year1, year2, TopName,  Gender, times);
-		report+=String.format("%9s \t","YEAR");
+		report+=String.format("%10s ","YEAR");
 		for(int i = 1; i <= num; ++i) {
-			report += String.format("%9s%d\t","Rank",i );
+			report += String.format("%24s %d","Rank",i );
 		}
 		report += "\n";
 		for(int i = 0; i<range; i++){
-			report += String.format("%10s \t",year1+i);
+			report += String.format("%11s ",year1+i);
 			for(int j = 0; j < num; ++j) {
-				report += String.format("%10s \t", Names[i][j]);
+				report += String.format("%25s ", Names[i][j]);
 			}
 			report += "\n";
 		}
