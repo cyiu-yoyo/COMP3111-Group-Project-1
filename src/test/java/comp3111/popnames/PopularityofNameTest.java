@@ -50,6 +50,7 @@ public class PopularityofNameTest {
     	int i[][] = PM.getRCP(1941,1945, "David", "M");
 		assertArrayEquals(i[4], RCPM5);
     }
+<<<<<<< HEAD
 	
 	@Test
 	public void testInvalidYearInput1() {
@@ -67,4 +68,7 @@ public class PopularityofNameTest {
 		assertEquals(ER, report);
 	}
 	
+=======
+
+>>>>>>> refs/remotes/origin/yiu_f0_test
 }
