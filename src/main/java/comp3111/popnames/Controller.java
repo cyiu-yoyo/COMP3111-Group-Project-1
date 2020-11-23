@@ -308,7 +308,11 @@ public class Controller {
     /**
      *Task Two
      *To be triggered by the "Report" button on the Reporting 2 Tab
-     *
+     *@description This function will get all the parameters from the UI and use them to finish the report.
+     *It will detect some of the illegal inputs here and will then return a different report for the
+     *user. Others detection of illegal inputs @see PopularityofName.java.
+     *@author Lan Bo
+     *@return the report itself
     */
     @FXML
     void getReport2() {
@@ -326,7 +330,7 @@ public class Controller {
     	String Report=PopularityofName.getReport(year1, year2, name, gender);
     	//String Report="";
     	//Report+=String.format("%d %d %s %s", year1, year2, name, gender);
-    	task2report.setText(Report);
+    	textAreaConsole.setText(Report);
     }
     
     /**
@@ -376,7 +380,11 @@ public class Controller {
     /**
      *Task Five
      *To be triggered by the "Predict" button on the Application 2 Tab
-     *
+     *@Description This function will get all the parameters from the UI and use them to finish the Prediction.
+     *It will detect some of the illegal inputs here and will then return a different report for the
+     *user. Other detection please @see PredictPairs.java.
+     *@author Lan Bo
+     *@return the predicted mate's name
     */ 
     @FXML
     void predictmateName() {
@@ -404,7 +412,7 @@ public class Controller {
     		preference="O";
     	}
     	String matename=PredictPairs.getpairname(year,name,gender,mategender,preference);
-    	task5result.setText(matename);
+    	textAreaConsole.setText(matename);
     }
 }
 
