@@ -45,21 +45,21 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="384.0" prefWidth="719.0">
                            <children>
                               <Label layoutX="79.0" layoutY="44.0" />
-                              <TextArea layoutX="96.0" layoutY="24.0" prefHeight="42.0" prefWidth="335.0" text="Generate a brief report in response to the queries on the most popular names registered at birth over a given period." wrapText="true" />
+                              <TextArea fx:id="task1report" layoutX="96.0" layoutY="24.0" prefHeight="42.0" prefWidth="335.0" text="Generate a brief report in response to the queries on the most popular names registered at birth over a given period." wrapText="true" />
                               <Label layoutX="96.0" layoutY="100.0" text="Top N (N&gt;=1): " />
-                              <TextField layoutX="178.0" layoutY="96.0" prefHeight="26.0" prefWidth="27.0" text="10" />
+                              <TextField fx:id="task1TopNum" layoutX="178.0" layoutY="96.0" prefHeight="27.0" prefWidth="58.0" text="10" />
                               <Label layoutX="253.0" layoutY="100.0" text="Gender: " />
-                              <RadioButton layoutX="308.0" layoutY="100.0" mnemonicParsing="false" selected="true" text="Male">
+                              <RadioButton fx:id="task1male" layoutX="308.0" layoutY="100.0" mnemonicParsing="false" selected="true" text="Male">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="T1" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton layoutX="360.0" layoutY="100.0" mnemonicParsing="false" text="Female" toggleGroup="$T1" />
+                              <RadioButton fx:id="task1female" layoutX="360.0" layoutY="100.0" mnemonicParsing="false" text="Female" toggleGroup="$T1" />
                               <Label layoutX="96.0" layoutY="132.0" text="Period (1880 - 2019): " />
-                              <TextField layoutX="276.0" layoutY="126.0" prefHeight="26.0" prefWidth="43.0" text="1945" />
-                              <TextField layoutX="210.0" layoutY="126.0" prefHeight="26.0" prefWidth="43.0" text="1941" />
-                              <Label layoutX="258.0" layoutY="130.0" text="to" />
-                              <Button layoutX="96.0" layoutY="169.0" mnemonicParsing="false" text="REPORT (yet to be implemented)" />
+                              <TextField fx:id="task1y2" layoutX="290.0" layoutY="126.0" prefHeight="27.0" prefWidth="45.0" text="1945" />
+                              <TextField fx:id="task1y1" layoutX="210.0" layoutY="126.0" prefHeight="27.0" prefWidth="52.0" text="1941" />
+                              <Label layoutX="271.0" layoutY="131.0" text="to" />
+                              <Button fx:id="buttonTask1" layoutX="96.0" layoutY="169.0" mnemonicParsing="false" onAction="#getReport1" text="REPORT" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -126,9 +126,20 @@
                   </Tab>
                   <Tab fx:id="tabApp1" text="Application1">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="412.0" prefWidth="719.0">
+                      <AnchorPane fx:id="task4Generate" minHeight="0.0" minWidth="0.0" prefHeight="412.0" prefWidth="719.0">
                            <children>
-                              <TextArea layoutX="40.0" layoutY="26.0" prefHeight="242.0" prefWidth="638.0" text="Develop and implement an online service using empirical data to help make informed decisions on naming their newborn babies.  Sample Scenario of Application: (i) Parents seeking advices on naming their babies; (ii) A couple seeking advices on naming their pets&#10;&#10;Input&#10;* iDadName, iMomName: Names of the baby’s dad and mom&#10;* iDadYOB, iMomYOB: Years of birth of the baby’s dad and mom&#10;* iVintageYear (optional): A year to be chosen from 1880 to 2019; If not chosen, set the value of iVintageYear to 2019&#10;&#10;Output&#10;* oBoyName: Recommended name for baby boy according to the NK-T4 Algorithm&#10;* oGirlName: Recommended name for baby girl according to the NK-T4 Algorithm&#10;* plus, WOW factor on user experience and algorithm design!" wrapText="true" />
+                              <TextField fx:id="task4DadName" layoutX="129.0" layoutY="111.0" prefHeight="26.0" prefWidth="88.0" text="David" />
+                              <Label layoutX="50.0" layoutY="116.0" text="Dad's name" />
+                              <TextField fx:id="task4MomName" layoutX="380.0" layoutY="111.0" prefHeight="26.0" prefWidth="88.0" text="Mary" />
+                              <Label layoutX="301.0" layoutY="116.0" text="Mom's name" />
+                              <TextField fx:id="task4DadYOB" layoutX="129.0" layoutY="145.0" prefHeight="26.0" prefWidth="88.0" text="2000" />
+                              <TextField fx:id="task4MomYOB" layoutX="380.0" layoutY="145.0" prefHeight="26.0" prefWidth="88.0" text="1999" />
+                              <Label layoutX="30.0" layoutY="150.0" text="Dad's birth year" />
+                              <Label layoutX="281.0" layoutY="150.0" text="Mom's birth year" />
+                              <TextField fx:id="task4VintageYear" layoutX="213.0" layoutY="189.0" prefHeight="26.0" prefWidth="88.0" text="2019" />
+                              <Label layoutX="139.0" layoutY="194.0" text="Vintage year" />
+                              <TextArea fx:id="App1Report" layoutX="139.0" layoutY="41.0" prefHeight="61.0" prefWidth="355.0" text="Name recommendation.&#10;" wrapText="true" />
+                              <Button fx:id="buttonTask4" layoutX="257.0" layoutY="243.0" mnemonicParsing="false" onAction="#getNameRecommendation" text="GENERATE" />
                            </children>
                         </AnchorPane>
                     </content>

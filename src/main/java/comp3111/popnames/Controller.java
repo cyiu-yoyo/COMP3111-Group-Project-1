@@ -44,6 +44,27 @@ public class Controller {
     private Tab tabReport1;
 
     @FXML
+    private TextField task1TopNum;
+    
+    @FXML
+    private RadioButton task1male;
+    
+    @FXML
+    private RadioButton task1female;
+    
+    @FXML
+    private TextArea task1report;
+    
+    @FXML
+    private TextField task1y1;
+    
+    @FXML
+    private TextField task1y2;
+    
+    @FXML
+    private Button buttonTask1;
+    
+    @FXML
     private ToggleGroup T1;
 
     @FXML
@@ -81,6 +102,27 @@ public class Controller {
 
     @FXML
     private Tab tabApp1;
+    
+    @FXML
+    private TextArea App1Report;
+    
+    @FXML
+    private TextField task4DadName;
+    
+    @FXML
+    private TextField task4MomName;
+    
+    @FXML
+    private TextField task4DadYOB;
+    
+    @FXML
+    private TextField task4MomYOB;
+    
+    @FXML
+    private TextField task4VintageYear;
+    
+    @FXML
+    private Button buttonTask4;
 
     @FXML
     private Tab tabApp2;
@@ -286,6 +328,7 @@ public class Controller {
     	//Report+=String.format("%d %d %s %s", year1, year2, name, gender);
     	task2report.setText(Report);
     }
+    
     /**
      *Task Four
      *To be triggered by the "Recommed" button on the Application1 Tab
