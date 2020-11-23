@@ -160,8 +160,56 @@ public class Controller {
     		oReport = String.format("Rank of %s (female) in year %d is #%d.\n", iNameF, iYear, oRank);
     	textAreaConsole.setText(oReport);
     }
-
-  
+    
+    *Task One
+    *To be triggered by the "Report" button on the Reporting1 Tab
+    *@description This function will get all the parameters from the UI and use them to finish the report.
+    *It will detect some of the illegal inputs here and will then return a different report for the
+    *user. Others detection of illegal inputs @see TopNamesForBirth.java.
+    *@author Yao ZHANG
+    *@return the report itself
+   */
+   @FXML
+   void getReport1() {
+   	String Report = "";
+   	if(task1y1.getText().equals("") || task1y2.getText().equals("") ||task1TopNum.getText().equals("")) {
+   		Report += "Something is missed and please ensure you have finished your input!";
+   		textAreaConsole.setText(Report);
+   		return;
+   	}
+   	float numf = Float.parseFloat(task1TopNum.getText());
+   	float year1f=Float.parseFloat(task1y1.getText());
+   	float year2f=Float.parseFloat(task1y2.getText());
+   	if(numf%1 != 0) {
+   		Report = "The parameter Top N is a float which is not allowed! Please type again! \n";
+   	}
+   	if(year1f%1 != 0) {
+   		Report += "The parameter year1 is a float which is not allowed! Please type again! \n";
+   	}
+   	if(year2f%1 != 0) {
+   		Report += "The parameter year2 is a float which is not allowed! Please type again! \n";
+   	}
+   	if(!Report.equals("")) {
+   		textAreaConsole.setText(Report);
+   		return;
+   	}
+   	int year1=Integer.parseInt(task1y1.getText());
+   	int year2=Integer.parseInt(task1y2.getText());
+   	int num=Integer.parseInt(task1TopNum.getText());
+   	
+   	String gender="";
+   	if(task1male.isSelected()){
+   		gender="M";
+   	}
+   	else{
+   		gender="F";
+   	}
+   	//String Report = String.format("no year %d %d",year1,year2);
+   	Report=TopNamesForBirth.getReport1(year1, year2, num, gender);
+   	textAreaConsole.setText(Report);
+   	return;
+   }
+ 
     /**
      *  Task Zero
      *  To be triggered by the "Rank (male)" button on the Task Zero Tab
@@ -236,6 +284,49 @@ public class Controller {
     	//String Report="";
     	//Report+=String.format("%d %d %s %s", year1, year2, name, gender);
     	task2report.setText(Report);
+    }
+    /**
+     *Task Four
+     *To be triggered by the "Recommed" button on the Application1 Tab
+     *@Description This function will get all the parameters from the UI and use them to finish the Recmonmendation.
+     *It will detect some of the illegal inputs here and will then return a different report for the
+     *user. Other detection please @see NameRecommendation.java.
+     *@author Yao ZHANG
+     *@return the report itself
+    */
+    @FXML
+    void getNameRecommendation() {
+    	String Report = "";
+    	if(task4DadName.getText().equals("") || task4MomName.getText().equals("") ||task4DadYOB.getText().equals("") || task4MomYOB.getText().equals("")) {
+    		Report += "Something is missed and please ensure you have finished your input!";
+    		textAreaConsole.setText(Report);
+    		return; //empty input situation.
+    	}
+    	float Dadyearf=Float.parseFloat(task4DadYOB.getText());
+    	float Momyearf=Float.parseFloat(task4MomYOB.getText());
+    	if(Dadyearf%1 != 0) {
+    		Report += "The parameter year1 is a float which is not allowed! Please type again! \n";
+    	}
+    	if(Momyearf%1 != 0) {
+    		Report += "The parameter year2 is a float which is not allowed! Please type again! \n";
+    	}
+    	if(!Report.equals("")) {
+    		textAreaConsole.setText(Report);
+    		return;
+    	}
+    	int Dadyear = Integer.parseInt(task4DadYOB.getText());
+    	int Momyear = Integer.parseInt(task4MomYOB.getText());
+    	String Dadname = task4DadName.getText();
+    	String Momname = task4MomName.getText();
+    	int VinYear;
+    	if(task4VintageYear.getText().equals("")) {
+    		VinYear = 2019;
+    	}
+    	else {
+    		VinYear = Integer.parseInt(task4VintageYear.getText());
+    	}
+    	Report = NameRecommendation.getBabyName(Dadyear, Momyear, Dadname,Momname, VinYear);
+    	textAreaConsole.setText(Report);
     }
     
     /**
