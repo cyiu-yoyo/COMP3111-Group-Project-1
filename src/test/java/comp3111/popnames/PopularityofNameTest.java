@@ -50,5 +50,21 @@ public class PopularityofNameTest {
     	int i[][] = PM.getRCP(1941,1945, "David", "M");
 		assertArrayEquals(i[4], RCPM5);
     }
-
+	
+	@Test
+	public void testInvalidYearInput1() {
+		PopularityofName PM = new PopularityofName();
+		String report = PM.getReport(2018, 2015, "XXX", "M");
+		String ER = "Invalid input time peroid!!\nPlease check your input";
+		assertEquals(ER, report);
+	}
+	
+	@Test
+	public void testInvalidYearInput2() {
+		PopularityofName PM = new PopularityofName();
+		String report = PM.getReport(1900, 2020, "XXX", "M");
+		String ER = "Input year out of range!!\nPlease check your input";
+		assertEquals(ER, report);
+	}
+	
 }
