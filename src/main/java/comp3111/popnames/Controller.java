@@ -160,55 +160,6 @@ public class Controller {
     		oReport = String.format("Rank of %s (female) in year %d is #%d.\n", iNameF, iYear, oRank);
     	textAreaConsole.setText(oReport);
     }
-    
-    *Task One
-    *To be triggered by the "Report" button on the Reporting1 Tab
-    *@description This function will get all the parameters from the UI and use them to finish the report.
-    *It will detect some of the illegal inputs here and will then return a different report for the
-    *user. Others detection of illegal inputs @see TopNamesForBirth.java.
-    *@author Yao ZHANG
-    *@return the report itself
-   */
-   @FXML
-   void getReport1() {
-   	String Report = "";
-   	if(task1y1.getText().equals("") || task1y2.getText().equals("") ||task1TopNum.getText().equals("")) {
-   		Report += "Something is missed and please ensure you have finished your input!";
-   		textAreaConsole.setText(Report);
-   		return;
-   	}
-   	float numf = Float.parseFloat(task1TopNum.getText());
-   	float year1f=Float.parseFloat(task1y1.getText());
-   	float year2f=Float.parseFloat(task1y2.getText());
-   	if(numf%1 != 0) {
-   		Report = "The parameter Top N is a float which is not allowed! Please type again! \n";
-   	}
-   	if(year1f%1 != 0) {
-   		Report += "The parameter year1 is a float which is not allowed! Please type again! \n";
-   	}
-   	if(year2f%1 != 0) {
-   		Report += "The parameter year2 is a float which is not allowed! Please type again! \n";
-   	}
-   	if(!Report.equals("")) {
-   		textAreaConsole.setText(Report);
-   		return;
-   	}
-   	int year1=Integer.parseInt(task1y1.getText());
-   	int year2=Integer.parseInt(task1y2.getText());
-   	int num=Integer.parseInt(task1TopNum.getText());
-   	
-   	String gender="";
-   	if(task1male.isSelected()){
-   		gender="M";
-   	}
-   	else{
-   		gender="F";
-   	}
-   	//String Report = String.format("no year %d %d",year1,year2);
-   	Report=TopNamesForBirth.getReport1(year1, year2, num, gender);
-   	textAreaConsole.setText(Report);
-   	return;
-   }
  
     /**
      *  Task Zero
@@ -260,6 +211,56 @@ public class Controller {
     	for (int i=1; i<=topN; i++)
     		oReport += String.format("#%d: %s\n", i, AnalyzeNames.getName(iYear, i, "M"));
     	textAreaConsole.setText(oReport);
+    }
+    
+    /**
+     *Task One
+     *To be triggered by the "Report" button on the Reporting1 Tab
+     *@description This function will get all the parameters from the UI and use them to finish the report.
+     *It will detect some of the illegal inputs here and will then return a different report for the
+     *user. Others detection of illegal inputs @see TopNamesForBirth.java.
+     *@author Yao ZHANG
+     *@return the report itself
+    */
+    @FXML
+    void getReport1() {
+    	String Report = "";
+    	if(task1y1.getText().equals("") || task1y2.getText().equals("") ||task1TopNum.getText().equals("")) {
+    		Report += "Something is missed and please ensure you have finished your input!";
+    		textAreaConsole.setText(Report);
+    		return;
+    	}
+    	float numf = Float.parseFloat(task1TopNum.getText());
+    	float year1f=Float.parseFloat(task1y1.getText());
+    	float year2f=Float.parseFloat(task1y2.getText());
+    	if(numf%1 != 0) {
+    		Report = "The parameter Top N is a float which is not allowed! Please type again! \n";
+    	}
+    	if(year1f%1 != 0) {
+    		Report += "The parameter year1 is a float which is not allowed! Please type again! \n";
+    	}
+    	if(year2f%1 != 0) {
+    		Report += "The parameter year2 is a float which is not allowed! Please type again! \n";
+    	}
+    	if(!Report.equals("")) {
+    		textAreaConsole.setText(Report);
+    		return;
+    	}
+    	int year1=Integer.parseInt(task1y1.getText());
+    	int year2=Integer.parseInt(task1y2.getText());
+    	int num=Integer.parseInt(task1TopNum.getText());
+    	
+    	String gender="";
+    	if(task1male.isSelected()){
+    		gender="M";
+    	}
+    	else{
+    		gender="F";
+    	}
+    	//String Report = String.format("no year %d %d",year1,year2);
+    	Report=TopNamesForBirth.getReport1(year1, year2, num, gender);
+    	textAreaConsole.setText(Report);
+    	return;
     }
     
     /**
