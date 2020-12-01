@@ -2,8 +2,19 @@ package comp3111.popnames;
 
 import org.apache.commons.csv.*;
 import edu.duke.*;
-
+/** 
+ *Task1 Program
+ *@author     <a href=mailto:yzhanghf@connect.ust.hk>Yao ZHANG</a>
+ *@version    1.0
+ */
 public class TopNamesForBirth {
+	/**
+     *getFileParsers:
+     *@Description This function will get parameters "year1" & "year2" from the UI and use them to get the corresponding
+     *data.
+     *@params int year1; int year2
+     *@return parsers: the data files
+    */ 
 	public static CSVParser[] getFileParsers(int year1, int year2) { //get the report
 		CSVParser parsers[] = new CSVParser[year2-year1+1];
 		FileResource fr;
@@ -13,12 +24,24 @@ public class TopNamesForBirth {
 		}
 		return parsers;
 	}
-	
+	/**
+     *getFileParsers:
+     *@Description This function  get the corresponding
+     *data.
+     *@params int year;
+     *@return parsers: the data file
+    */ 
 	public static CSVParser getFileParser(int year) {
 	     FileResource fr = new FileResource(String.format("dataset/yob%s.csv", year));
 	     return fr.getCSVParser(false);
 		}
-	
+	/**
+     *getNames:
+     *@Description This function  get the name list for the inRange year
+     *data.
+     *@params int year1, int year2, int num, String gender
+     *@return name array
+    */ 
 	public static String[][] getNames(int year1, int year2, int num, String gender){
 		//asume n is in range(n<1 or n is too large)
 		// can use the total babys in task0; uniqueGirls & uniqueBoys
@@ -40,6 +63,12 @@ public class TopNamesForBirth {
 		
 		return output;
 	}
+	/**
+     *checkInRange:
+     *@Description This function will check whether the range is legal or it is out of bound.
+     *@params int year1; int year2; int num; String gender
+     *@return boolean inRange;
+    */ 
 	public static boolean checkInRange(int year1, int year2, int num, String gender) {
 		boolean inRange = true;
 		int maxNum = getMaxnum(year1,gender);
@@ -59,7 +88,12 @@ public class TopNamesForBirth {
 		return inRange;
 
 	}
-	
+	/**
+     *getMaxnum:
+     *@Description A helper function to retrive the maximum number of names of a certain gender for a certain year;
+     *@params int year, String gender
+     *@return int Maximum;
+    */ 
 	public static int getMaxnum(int year, String gender) {
 		int Maxnum = 0;
 		for (CSVRecord rec : getFileParser(year)) {
@@ -69,7 +103,12 @@ public class TopNamesForBirth {
 		}
 		return Maxnum;
 	}
-	
+	/**
+     *getReport1:
+     *@Description A function that will detect some of the illegal situations and generate corresponding reports 
+     *@params int year1, int year2, int num, String gender
+     *@return String report.
+    */ 
 	public static String getReport1(int year1, int year2, int num, String gender) {
 		int range = year2 - year1 + 1;
 		if(range < 1 || year1 < 1880 || year2 > 2019) {
@@ -83,13 +122,6 @@ public class TopNamesForBirth {
 		String Names[][]=getNames(year1,year2,num,gender);
 		int times = 0;
 		String TopName = "";
-//		int threshold = -1;
-//		if(range % 2 == 0) {
-//			 threshold = range/2;
-//		}
-//		else {
-//			 threshold = (range+1)/2;
-//		}
 		int arr[] = new int[range];
 		for(int i = 0; i < range; ++i) {
 			arr[i] = 1;
@@ -117,15 +149,21 @@ public class TopNamesForBirth {
 		else {Gender = "female";}
 		report+=String.format("Over the period %s to %s, the name \"%s\" for %s has hold the top spot most often for a total of %d times. \n\n"
 				, year1, year2, TopName,  Gender, times);
-		report+=String.format("%10s ","YEAR");
+		report+=String.format("%4s"," YEAR");
 		for(int i = 1; i <= num; ++i) {
-			report += String.format("%24s %d","Rank",i );
+	
+			String cur_rank = String.format("Rank%d",i);
+			int lengtha = cur_rank.length();
+			report += String.format("%" + 26 +"s", cur_rank);
+			if(i == 1) {report +=" ";}
 		}
 		report += "\n";
 		for(int i = 0; i<range; i++){
-			report += String.format("%11s ",year1+i);
+			report += String.format("%6d",year1+i);
+			if((year1+i) % 10 == 1) {report += " ";}
 			for(int j = 0; j < num; ++j) {
-				report += String.format("%25s ", Names[i][j]);
+				int lengthb = Names[i][j].length();
+				report += String.format("%" + 26 + "s", Names[i][j]);
 			}
 			report += "\n";
 		}

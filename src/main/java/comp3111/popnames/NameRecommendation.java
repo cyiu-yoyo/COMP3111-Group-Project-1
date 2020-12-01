@@ -3,13 +3,29 @@ package comp3111.popnames;
 import org.apache.commons.csv.*;
 import edu.duke.*;
 
+/** 
+ *Task4 Program
+ *@author     <a href=mailto:yzhanghf@connect.ust.hk>Yao Zhang</a>
+ *@version    1.0
+ */
 public class NameRecommendation {
-
+	/**
+     *getFileParsers:
+     *@Description This function  get the corresponding
+     *data.
+     *@params int year;
+     *@return parsers: the data file
+    */ 
 	public static CSVParser getFileParser(int year) {
      FileResource fr = new FileResource(String.format("dataset/yob%s.csv", year));
      return fr.getCSVParser(false);
 	}
- 		
+	/**
+     *getRank:
+     *@Description This function  get the rank for a certain name for a certain gender in a certain year
+     *@params int year, String name, String gender 
+     *@return int ranking
+    */ 	
 	 public static int getRank(int year, String name, String gender) {
 	     boolean found = false;
 	     int oRank = 0;
@@ -32,7 +48,12 @@ public class NameRecommendation {
 	     	return 1;
 	 }
 	 
- 
+	 /**
+	     *getName:
+	     *@Description This function  get the Name for a certain rank for a certain gender in a certain year
+	     *@params int year, int rank, String gender 
+	     *@return String name
+	    */ 	
 	 public static String getName(int year, int rank, String gender) {
 	 	boolean found = false;
 	     String oName = "";
@@ -56,7 +77,13 @@ public class NameRecommendation {
 	     else
 	     	return "information on the name at the specified rank is not available";
 	 }
-	 
+	 /**
+	     *getBabyName:
+	     *@Description This function try to generate the recommended names for babys and it
+	     *will do some illegal situation detection as well.
+	     *@params int Dadyear, int Momyear, String Dadname, String Momname, int Vintageyear 
+	     *@return String report of the recommended names
+	    */ 
 	 public static String getBabyName(int Dadyear, int Momyear, String Dadname, String Momname, int Vintageyear) {
 		 if(Dadyear < 1880 || Dadyear > 2019 || Momyear < 1880 || Momyear > 2019 ) {
 			 return "The year of Dad/Mom's birth is out of range! Please type a new one!";
