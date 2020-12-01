@@ -78,6 +78,21 @@ public class NameRecommendation {
 	     	return "information on the name at the specified rank is not available";
 	 }
 	 /**
+	     *getMaxnum:
+	     *@Description A helper function to retrive the maximum number of names of a certain gender for a certain year;
+	     *@params int year, String gender
+	     *@return int Maximum;
+	    */ 
+	 public static int getMaxnum(int year, String gender) {
+			int Maxnum = 0;
+			for (CSVRecord rec : getFileParser(year)) {
+				if (rec.get(1).equals(gender)) {
+					Maxnum++;
+				}
+			}
+			return Maxnum;
+		}
+	 /**
 	     *getBabyName:
 	     *@Description This function try to generate the recommended names for babys and it
 	     *will do some illegal situation detection as well.
@@ -94,6 +109,10 @@ public class NameRecommendation {
 		 String Report = "";
 		 int DadRank = getRank(Dadyear,Dadname,"M");
 		 int MomRank = getRank(Momyear,Momname,"F");
+		 int maxRank_g = getMaxnum(Vintageyear, "F");
+		 int maxRank_b = getMaxnum(Vintageyear, "M");
+		 if(DadRank > maxRank_b) {DadRank = 1;}
+		 if(MomRank > maxRank_g) {MomRank = 1;}
 		 //Report += String.format("dad's rank: %d mom's rank: %d \n", DadRank, MomRank);
 		 String BabyBoyName = getName(Vintageyear, DadRank, "M");
 		 String BabyGirlName = getName(Vintageyear, MomRank, "F");
