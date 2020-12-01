@@ -39,10 +39,10 @@ public class Controller {
 
     @FXML
     private Button buttonSummary;
-    
+
     @FXML
     private Tab tabReport1;
-    
+
     @FXML
     private TextField task1TopNum;
     
@@ -69,7 +69,7 @@ public class Controller {
 
     @FXML
     private Tab tabReport2;
-    
+
     @FXML
     private TextArea task2report;
 
@@ -123,17 +123,54 @@ public class Controller {
     
     @FXML
     private Button buttonTask4;
-    
 
     @FXML
     private Tab tabApp2;
+
+    @FXML
+    private TextArea task5result;
+
+    @FXML
+    private TextField task5Name;
+
+    @FXML
+    private TextField task5Year;
+
+    @FXML
+    private RadioButton task5male;
+
+    @FXML
+    private ToggleGroup T51;
+
+    @FXML
+    private RadioButton task5female;
+
+    @FXML
+    private RadioButton task5matemale;
+
+    @FXML
+    private ToggleGroup T52;
+
+    @FXML
+    private RadioButton task5matefemale;
+
+    @FXML
+    private RadioButton task5younger;
+
+    @FXML
+    private ToggleGroup T53;
+
+    @FXML
+    private RadioButton task5older;
+
+    @FXML
+    private Button buttontask5;
 
     @FXML
     private Tab tabApp3;
 
     @FXML
     private TextArea textAreaConsole;
-    
 
     /**
      *  Task Zero
@@ -165,8 +202,7 @@ public class Controller {
     		oReport = String.format("Rank of %s (female) in year %d is #%d.\n", iNameF, iYear, oRank);
     	textAreaConsole.setText(oReport);
     }
-
-  
+ 
     /**
      *  Task Zero
      *  To be triggered by the "Rank (male)" button on the Task Zero Tab
@@ -271,7 +307,12 @@ public class Controller {
     
     /**
      *Task Two
-     *
+     *To be triggered by the "Report" button on the Reporting 2 Tab
+     *@description This function will get all the parameters from the UI and use them to finish the report.
+     *It will detect some of the illegal inputs here and will then return a different report for the
+     *user. Others detection of illegal inputs @see PopularityofName.java.
+     *@author Lan Bo
+     *@return the report itself
     */
     @FXML
     void getReport2() {
@@ -291,6 +332,7 @@ public class Controller {
     	//Report+=String.format("%d %d %s %s", year1, year2, name, gender);
     	textAreaConsole.setText(Report);
     }
+    
     /**
      *Task Four
      *To be triggered by the "Recommed" button on the Application1 Tab
@@ -334,5 +376,43 @@ public class Controller {
     	Report = NameRecommendation.getBabyName(Dadyear, Momyear, Dadname,Momname, VinYear);
     	textAreaConsole.setText(Report);
     }
+    
+    /**
+     *Task Five
+     *To be triggered by the "Predict" button on the Application 2 Tab
+     *@Description This function will get all the parameters from the UI and use them to finish the Prediction.
+     *It will detect some of the illegal inputs here and will then return a different report for the
+     *user. Other detection please @see PredictPairs.java.
+     *@author Lan Bo
+     *@return the predicted mate's name
+    */ 
+    @FXML
+    void predictmateName() {
+    	int year=Integer.parseInt(task5Year.getText());
+    	String name=task5Name.getText();
+    	String gender="";
+    	String mategender="";
+    	String preference="";
+    	if(task5male.isSelected()) {
+    		gender="M";
+    	}
+    	else {
+    		gender="F";
+    	}
+    	if(task5matemale.isSelected()) {
+    		mategender="M";
+    	}
+    	else {
+    		mategender="F";
+    	}
+    	if(task5younger.isSelected()) {
+    		preference="Y";
+    	}
+    	else {
+    		preference="O";
+    	}
+    	String matename=PredictPairs.getpairname(year,name,gender,mategender,preference);
+    	textAreaConsole.setText(matename);
+    }
 }
-	
+
