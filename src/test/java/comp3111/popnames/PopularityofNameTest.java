@@ -10,11 +10,11 @@ public class PopularityofNameTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		RCPM1 = new int[] {7,30551,2};
-		RCPM2 = new int[] {6,35892,2};
-		RCPM3 = new int[] {6,37237,2};
-		RCPM4 = new int[] {6,37374,2};
-		RCPM5 = new int[] {6,37093,2};
+		RCPM1 = new int[] {7,30551,1227941};
+		RCPM2 = new int[] {6,35892,1380774};
+		RCPM3 = new int[] {6,37237,1426846};
+		RCPM4 = new int[] {6,37374,1362555};
+		RCPM5 = new int[] {6,37093,1345610};
 	}
 	@Test 
     public void testGetRCPMale1() {
