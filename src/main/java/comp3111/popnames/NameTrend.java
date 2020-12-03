@@ -23,7 +23,16 @@ public class NameTrend {
 	}
 	
 	public static Vector<String> getNameList(int year1, int year2, String gender) {
+		
 		Vector<String> output = new Vector<String>();
+		if (year2 <= year1) {
+			output.add("Wrong input! Please make sure the second year is larger than the first year!");
+			return output;
+		}
+		else if (year1 < 1880 || year2 > 2019) {
+			output.add("Wrong input! Please make sure both years are in range 1880 to 2019!");
+			return output; 
+		}
 		CSVParser[] parsers=getFileParsers(year1,year2);
 		for (int i = 0; i < parsers.length; i++) {  // iterate through every year
 			for (CSVRecord rec : parsers[i]) {  // iterate through every row
@@ -39,6 +48,10 @@ public class NameTrend {
 	
 	// same as in task0
 	public static int getRank(int year, String name, String gender) {
+		if (year < 1880 || year > 2019) {
+			return -1;
+		}
+		
 		boolean found = false;
 		int oRank = 0;
 		int rank = 1;
@@ -95,31 +108,31 @@ public class NameTrend {
 	}
 	
 	public static String getFallName(Vector<String> nameList, int[][] allDiff) {
-		int rankRise = 0;
-		String nameRise = "";
-		for (int i = 0; i < allDiff.length; i++) {
-			for (int j = 0; j < allDiff[0].length; j++) {
-				if (allDiff[i][j] > rankRise) {
-					rankRise = allDiff[i][j];
-					nameRise = nameList.get(i);
-				}
-			}
-		}
-		return nameRise;
-	}
-	
-	public static String getRiseName(Vector<String> nameList, int[][] allDiff) {
 		int rankFall = 0;
 		String nameFall = "";
 		for (int i = 0; i < allDiff.length; i++) {
 			for (int j = 0; j < allDiff[0].length; j++) {
-				if (allDiff[i][j] < rankFall) {
+				if (allDiff[i][j] > rankFall) {
 					rankFall = allDiff[i][j];
 					nameFall = nameList.get(i);
 				}
 			}
 		}
 		return nameFall;
+	}
+	
+	public static String getRiseName(Vector<String> nameList, int[][] allDiff) {
+		int rankRise = 0;
+		String nameRise = "";
+		for (int i = 0; i < allDiff.length; i++) {
+			for (int j = 0; j < allDiff[0].length; j++) {
+				if (allDiff[i][j] < rankRise) {
+					rankRise = allDiff[i][j];
+					nameRise = nameList.get(i);
+				}
+			}
+		}
+		return nameRise;
 	}
 	
 	public static int[] getFall(int year1, int[][] allRanks, int[][] allDiff) {

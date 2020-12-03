@@ -12,6 +12,10 @@ public class PredictScores {
 	
 	// same as in task0
 	public static int get_oRank(int iYOB, String iName, String iGender) {
+		if (iYOB < 1880 || iYOB > 2019) {
+			return -2;
+		}
+		
 		boolean found = false;
 		int oRank = 0;
 		int rank = 1;
@@ -45,6 +49,10 @@ public class PredictScores {
 	}
 	
 	public static int get_oRankMate(int oYOB, String iNameMate, String iGenderMate) {
+		if (oYOB < 1880 || oYOB > 2019) {
+			return -2;
+		}
+		
 		boolean found = false;
 		int oRankMate = 0;
 		int rank = 1;

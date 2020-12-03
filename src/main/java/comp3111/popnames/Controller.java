@@ -247,6 +247,10 @@ public class Controller {
     		gender="F";
     	}
     	Vector<String> nameList = NameTrend.getNameList(year1, year2, gender);
+    	if (nameList.size() == 1) {
+    		textAreaConsole.setText(nameList.get(0));
+    		return;
+    	}
     	int[][] allRanks = NameTrend.getAllRanks(year1, year2, gender, nameList);
     	int[][] allDiff = NameTrend.getDifference(year1, year2, gender, allRanks);
     	String name_rise = NameTrend.getRiseName(nameList, allDiff);
@@ -300,8 +304,42 @@ public class Controller {
     	}
     	
     	int oRank = PredictScores.get_oRank(iYOB, iName, iGender);
+    	if (oRank == -1) {
+    		String gender = "";
+    		if (iGender=="M") {
+    			gender = "males";
+    		}
+    		else if (iGender=="F") {
+    			gender = "females";
+    		}
+    		report += String.format("Your name, %s, is not found in the %s born in %d. Please re-enter your informations.", iName, gender, iYOB);
+    		textAreaConsole.setText(report);
+    		return;
+    	}
+    	else if (oRank == -2) {
+    		report += String.format("Wrong input! Please make sure year of birth is in range 1880 to 2019!");
+    		textAreaConsole.setText(report);
+    		return;
+    	}
     	int oYOB = PredictScores.get_oYOB(iYOB, iPreference);
+    	if (oYOB < 1880 || oYOB > 2019) {
+    		report += String.format("Sorry, we do not have the data of people born in %d. Please re-enter your preference or year of birth.", oYOB);
+    		textAreaConsole.setText(report);
+    		return;
+    	}
     	int oRankMate = PredictScores.get_oRankMate(oYOB, iNameMate, iGenderMate);
+    	if (oRankMate == -1) {
+    		String gender2 = "";
+    		if (iGenderMate=="M") {
+    			gender2 = "male";
+    		}
+    		else if (iGenderMate=="F") {
+    			gender2 = "female";
+    		}
+    		report += String.format("There is no %s with name %s that suits your preference of %s mates. Please re-enter your mate's informations.", gender2, iNameMate, iPreference);
+    		textAreaConsole.setText(report);
+    		return;
+    	}
     	double oScore = PredictScores.get_oScore(oRank, oRankMate);
     	
     	report += String.format("The compatibility of you, %s, and your mate, %s, is %.2f%%.", iName, iNameMate, oScore);
