@@ -9,6 +9,11 @@ import edu.duke.*;
  *@version    1.0
  */
 public class PopularityofName {
+	/**
+	 * read the csv files of the given period of time
+	 * @param year1 the starting year
+	 * @param year2 the ending year
+	 */
 	public static CSVParser[] getFileParsers(int year1, int year2) {
 		CSVParser parsers[] = new CSVParser[year2-year1+1];
 		FileResource fr;
@@ -19,6 +24,13 @@ public class PopularityofName {
 		return parsers;
 	}
 	
+	/**
+	 * get the rank and count of the given gender of name
+	 * @param year1 the starting year
+	 * @param year2 the ending year
+	 * @param name the name which you want get the rank
+	 * @param gender gender of the name
+	 */
 	public static int[][] getRCP(int year1, int year2, String name, String gender) {
 		int output[][] = new int[year2-year1+1][3];
 		boolean found=false;
@@ -45,16 +57,24 @@ public class PopularityofName {
 			if(!found){
 				output[i][0]=-1;
 				output[i][1]=0;
-				output[i][2]=0;
+				output[i][2]=1;
 			}
 			else {
 				//output[i][2]=(output[i][1]*100)/totalcount;
 				output[i][2]=totalcount;
+				//System.out.println(totalcount);
 			}
 		}
 		return output;
 	}
 	
+	/**
+	 * generate the report about the popularity of name
+	 * @param year1 the starting year
+	 * @param year2 the ending year
+	 * @param name the name which you want get the rank
+	 * @param gender gender of the name
+	 */
 	public static String getReport(int year1, int year2, String name, String gender) {
 		String report="";
 		if(year1<1880 || year2<1880 || year1>2019 || year2>2019)

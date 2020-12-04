@@ -316,6 +316,18 @@ public class Controller {
     */
     @FXML
     void getReport2() {
+    	if(task2y1.getText().equals("") || task2y2.getText().equals(""))
+    	{
+    		textAreaConsole.setText("Please provide time peroid");
+    		return;
+    	}
+    	try {
+    		Integer.parseInt(task2y1.getText());
+    		Integer.parseInt(task2y2.getText());
+		} catch (NumberFormatException e) {
+			textAreaConsole.setText("Please provide legal time input");
+			return;
+		}
     	int year1=Integer.parseInt(task2y1.getText());
     	int year2=Integer.parseInt(task2y2.getText());
     	String name=task2name.getText();
@@ -388,6 +400,17 @@ public class Controller {
     */ 
     @FXML
     void predictmateName() {
+    	if(task5Year.getText().equals(""))
+    	{
+    		textAreaConsole.setText("Please provide your year of birth");
+    		return;
+    	}
+    	try {
+    		Integer.parseInt(task5Year.getText());
+		} catch (NumberFormatException e) {
+			textAreaConsole.setText("Please provide legal time input");
+			return;
+		}
     	int year=Integer.parseInt(task5Year.getText());
     	String name=task5Name.getText();
     	String gender="";

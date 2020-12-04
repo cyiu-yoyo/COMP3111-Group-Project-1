@@ -79,11 +79,7 @@
                                           <ToggleGroup fx:id="T11" />
                                        </toggleGroup>
                                     </RadioButton>
-                                    <RadioButton fx:id="task2female" layoutX="384.0" layoutY="220.0" mnemonicParsing="false" text="Female">
-                                       <toggleGroup>
-                                          <ToggleGroup fx:id="T11" />
-                                       </toggleGroup>
-                                    </RadioButton>
+                                    <RadioButton fx:id="task2female" layoutX="384.0" layoutY="220.0" mnemonicParsing="false" text="Female" toggleGroup="$T11" />
                                     <Label layoutX="109.0" layoutY="256.0" text="Period (1880 - 2019): " />
                                     <TextField fx:id="task2y2" layoutX="299.0" layoutY="250.0" prefHeight="26.0" prefWidth="43.0" text="1945" />
                                     <TextField fx:id="task2y1" layoutX="233.0" layoutY="250.0" prefHeight="26.0" prefWidth="43.0" text="1941" />
@@ -107,11 +103,7 @@
                                           <ToggleGroup fx:id="T111" />
                                        </toggleGroup>
                                     </RadioButton>
-                                    <RadioButton layoutX="225.0" layoutY="104.0" mnemonicParsing="false" selected="true" text="Male">
-                                       <toggleGroup>
-                                          <ToggleGroup fx:id="T111" />
-                                       </toggleGroup>
-                                    </RadioButton>
+                                    <RadioButton layoutX="225.0" layoutY="104.0" mnemonicParsing="false" selected="true" text="Male" toggleGroup="$T111" />
                                     <Label layoutX="112.0" layoutY="104.0" text="Gender of Interest: " />
                                     <Label layoutX="112.0" layoutY="138.0" text="Period (1880 - 2019): " />
                                     <TextField layoutX="292.0" layoutY="132.0" prefHeight="26.0" prefWidth="43.0" text="1945" />
