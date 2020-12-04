@@ -262,13 +262,13 @@ public class Controller {
     			+ "On the other hand, %s is found to have shown the largest fall in popularity from rank %d in year %d to rank %d "
     			+ "in year %d.", name_rise, rise[0], rise[1], rise[2], rise[3], name_fall, fall[0], fall[1], fall[2], fall[3]);
     	
-    	report += "Name        Lowest Rank [in year]        Highest Rank [in year]        Trend";
+    	report += "Name             Lowest Rank [in year]             Highest Rank [in year]             Trend";
     	report += "\n";
     	
-    	report += String.format("%s     %d  [ %d ]     %d  [ %d ]     %d ranks up", name_rise, rise[0], rise[1], rise[2], rise[3], rise[4]);
+    	report += String.format("%s          %d  [ %d ]          %d  [ %d ]          %d ranks up", name_rise, rise[0], rise[1], rise[2], rise[3], rise[4]);
     	report += "\n";
     	
-    	report += String.format("%s     %d  [ %d ]     %d  [ %d ]     %d ranks down", name_fall, fall[2], fall[3], fall[4], fall[0], fall[1]);
+    	report += String.format("%s          %d  [ %d ]          %d  [ %d ]          %d ranks down", name_fall, fall[2], fall[3], fall[4], fall[0], fall[1]);
     	
     	task3_textSummary.setText(brief);
     	textAreaConsole.setText(report);
