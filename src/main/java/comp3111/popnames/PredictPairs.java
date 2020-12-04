@@ -72,7 +72,7 @@ public class PredictPairs {
 	}
 	
 	/**
-	 * Ruturn your pair name
+	 * Return your pair name
 	 * @param year your year of birth
 	 * @param name your name
 	 * @param gender your gender
