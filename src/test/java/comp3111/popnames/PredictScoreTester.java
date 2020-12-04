@@ -41,7 +41,7 @@ public class PredictScoreTester {
     public void testGet_oRankNotFound4() {
 		PredictScores a = new PredictScores();
     	int i = a.get_oRank(1879, "Faiz", "F");
-		assertEquals(i, -1);
+		assertEquals(i, -2);
     }
     
     @Test 
@@ -86,7 +86,7 @@ public class PredictScoreTester {
     public void testGet_oRankMateNotFound4() {
 		PredictScores a = new PredictScores();
     	int i = a.get_oRankMate(1879, "Faiz", "F");
-		assertEquals(i, -1);
+		assertEquals(i, -2);
     }
     
     @Test 
@@ -118,12 +118,20 @@ public class PredictScoreTester {
     	assertTrue(i==1994);
     }
     
+    @Test 
+    public void test_get_unique_people() {
+    	PredictScores a = new PredictScores();
+    	int i = a.get_unique_people(2012, "M");
+    	assertTrue(i==14216);
+    }
+
+    
     @Test public void testget_oScore() {
     	PredictScores a = new PredictScores();
+    	int k = a.get_oRank(2018, "David", "M");
     	int j = a.get_oRankMate(2019, "Desire", "F");
-    	int k = a.get_oRank(2019, "David", "M");
-    	double i = a.get_oScore(k, j);
-    	assertTrue(i==1.0);
+    	double i = a.get_oScore(k, j, 2018, 2019, "M", "F");
+    	assertTrue(i==86.42);
     }
 
 }

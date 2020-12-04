@@ -227,18 +227,34 @@ public class Controller {
     	textAreaConsole.setText(oReport);
     }
     
-    
     /**
      *  Task 3
      *  To be triggered by the "Report" button on the Reporting 3 Tab
-     *  
+     *  @description This function will get all parameters from the UI and use them to finish the report.
+     *  If any of the inputs are incorrect or invalid, it will return a different report for the users.
+     *  For other illegal input detections, @see NameTrend.java.
+     *  @author Yih CHENG
+     *  @return no return needed
      */
     @FXML
     void task3_getReport() {
     	String report = "", brief = "";
-    	
     	int year1=Integer.parseInt(task3_textYear1.getText());
     	int year2=Integer.parseInt(task3_textYear2.getText());
+    	try {
+    		Integer.parseInt(task3_textYear1.getText());
+    	} catch (NumberFormatException e) {
+    		textAreaConsole.setText("The input is incorrect. Please enter a valid input!");
+    		return;
+    	}
+    	try { 
+    		Integer.parseInt(task3_textYear2.getText());
+    	} catch (NumberFormatException e) {
+    		textAreaConsole.setText("The input is incorrect. Please enter a valid input!");
+    		return;
+    	}
+
+    	
     	String gender="";
     	if(task3_buttonMale.isSelected()){
     		gender="M";
@@ -262,18 +278,29 @@ public class Controller {
     			+ "On the other hand, %s is found to have shown the largest fall in popularity from rank %d in year %d to rank %d "
     			+ "in year %d.", name_rise, rise[0], rise[1], rise[2], rise[3], name_fall, fall[0], fall[1], fall[2], fall[3]);
     	
-    	report += "Name             Lowest Rank [in year]             Highest Rank [in year]             Trend";
+    	report += "Name             Lowest Rank            Highest Rank              Trend";
+    	report += "\n";
+    	report += "                            [in year]                          [in year]                     ";
     	report += "\n";
     	
     	report += String.format("%s          %d  [ %d ]          %d  [ %d ]          %d ranks up", name_rise, rise[0], rise[1], rise[2], rise[3], rise[4]);
     	report += "\n";
     	
-    	report += String.format("%s          %d  [ %d ]          %d  [ %d ]          %d ranks down", name_fall, fall[2], fall[3], fall[4], fall[0], fall[1]);
+    	report += String.format("%s          %d  [ %d ]          %d  [ %d ]          %d ranks down", name_fall, fall[0], fall[1], fall[2], fall[3], fall[4]);
     	
     	task3_textSummary.setText(brief);
     	textAreaConsole.setText(report);
     }
     
+    /**
+     *  Task 6
+     *  To be triggered by the "Report" button on the Reporting 6 Tab
+     *  @description This function will get all parameters from the UI and use them to finish the report.
+     *  If any of the inputs are incorrect or invalid, it will return a different report for the users.
+     *  For other illegal input detections, @see PredictScore.java.
+     *  @author Yih CHENG
+     *  @return no return needed
+     */
     @FXML
     void task6_getScore() {
     	String report = "";
@@ -287,6 +314,12 @@ public class Controller {
     		iGender = "F";
     	}
     	int iYOB = Integer.parseInt(task6_textBirthYear.getText());
+    	try {
+    		Integer.parseInt(task6_textBirthYear.getText());
+    	} catch (NumberFormatException e) {
+    		textAreaConsole.setText("The input is incorrect. Please enter a valid input!");
+    		return;
+    	}
     	String iNameMate = task6_textMateName.getText();
     	String iGenderMate = "";
     	if(task6_buttonMale2.isSelected()){
@@ -340,7 +373,7 @@ public class Controller {
     		textAreaConsole.setText(report);
     		return;
     	}
-    	double oScore = PredictScores.get_oScore(oRank, oRankMate);
+    	double oScore = PredictScores.get_oScore(oRank, oRankMate, iYOB, oYOB, iGender, iGenderMate);
     	
     	report += String.format("The compatibility of you, %s, and your mate, %s, is %.2f%%.", iName, iNameMate, oScore);
     	

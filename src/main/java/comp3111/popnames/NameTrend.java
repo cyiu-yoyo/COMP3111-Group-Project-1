@@ -5,13 +5,34 @@ import edu.duke.*;
 
 import java.util.*;
 
+/**
+ * Task3 Program
+ * @author	<a href=mailto:ychengaw@connect.ust.hk>Yih CHENG</a>
+ * @version	1.0
+ *
+ */
+
 public class NameTrend {
 	// same as in task0
+	/**
+	 * getFileParser:
+	 * @Description This function will get a "year "parameter from the UI and use it to get the corresponding
+	 * data.
+	 * @param int year;
+	 * @return parser: a data file
+	 */
 	public static CSVParser getFileParser(int year) {
 		FileResource fr = new FileResource(String.format("dataset/yob%s.csv", year));
 		return fr.getCSVParser(false);
 	}
 	
+	/**
+	 * getFileParsers:
+	 * @Description This function will get year parameters "year1" & "year2" from the UI and use it to get the corresponding
+	 * data.
+	 * @param int year1; int year2;
+	 * @return parsers: the data files
+	 */
 	public static CSVParser [] getFileParsers(int year1, int year2) {  // get data
 	     CSVParser parsers [] = new CSVParser[year2 - year1 + 1];
 	     FileResource fr;
@@ -22,6 +43,13 @@ public class NameTrend {
 	     return parsers;
 	}
 	
+	/**
+	 * getNameList:
+	 * @Description This function will get year parameters "year1" & "year2" and the gender and use it to get a list of every 
+	 * person's names within "year1" & "year2" and of gender "gender"
+	 * @param int year1; int year2; String gender;
+	 * @return Vector<String>: a list of all names
+	 */
 	public static Vector<String> getNameList(int year1, int year2, String gender) {
 		
 		Vector<String> output = new Vector<String>();
@@ -47,6 +75,13 @@ public class NameTrend {
 	}
 	
 	// same as in task0
+	/**
+	 * getRank:
+	 * @Description This function will get a year parameter "year" and a String name and a String gender and use it to get 
+	 * the rank of name "name", gender "gender" in year "year".
+	 * @param int year; String name; String gender
+	 * @return int: rank
+	 */
 	public static int getRank(int year, String name, String gender) {
 		if (year < 1880 || year > 2019) {
 			return -1;
@@ -73,6 +108,13 @@ public class NameTrend {
 			return -1;
 	}
 	
+	/**
+	 * getAllRanks:
+	 * @Description This function will get two year parameters "year1" & "year2", a String gender, and a Vector<String>  
+	 * nameList from the UI and get the rank of every name in nameList within every year "year1" & "year2".
+	 * @param int year1; int year2; String gender; Vector<String> nameList
+	 * @return 2D array: all rank arrays
+	 */
 	public static int[][] getAllRanks(int year1, int year2, String gender, Vector<String> nameList) {
 		int rankArray[][] = new int[nameList.size()][year2 - year1 + 1];
 		for (int i = 0; i < nameList.size(); i++) {
@@ -84,6 +126,13 @@ public class NameTrend {
 		return rankArray;
 	}
 	
+	/**
+	 * getDifference:
+	 * @Description This function will get two year parameters "year1" & "year2", a String gender, and an int[][] allRanks  
+	 * from the UI and get the rank difference of every rank with respect to each valid ranks in allRanks.
+	 * @param int year1; int year2; String gender; int[][] allRanks;
+	 * @return 2D array: rank difference array
+	 */
 	public static int[][] getDifference(int year1, int year2, String gender, int[][] allRanks) {
 		int diffArray[][] = new int[allRanks.length][allRanks[0].length];
 		for (int i = 0; i < allRanks.length; i++) {
@@ -107,6 +156,13 @@ public class NameTrend {
 		return diffArray;
 	}
 	
+	/**
+	 * getFallName:
+	 * @Description This function will get two parameters Vector<String> nameList and int[][] allDiff and find out the name 
+	 * that has fallen the most in ranks according to allDiff array.
+	 * @param Vector<String> nameList; int[][] allDiff
+	 * @return String: nameFall
+	 */
 	public static String getFallName(Vector<String> nameList, int[][] allDiff) {
 		int rankFall = 0;
 		String nameFall = "";
@@ -120,6 +176,14 @@ public class NameTrend {
 		}
 		return nameFall;
 	}
+	
+	/**
+	 * getRiseName:
+	 * @Description This function will get two parameters Vector<String> nameList and int[][] allDiff and find out the name 
+	 * that has risen the most in ranks according to allDiff array.
+	 * @param Vector<String> nameList; int[][] allDiff
+	 * @return String: nameRise
+	 */
 	
 	public static String getRiseName(Vector<String> nameList, int[][] allDiff) {
 		int rankRise = 0;
@@ -135,6 +199,13 @@ public class NameTrend {
 		return nameRise;
 	}
 	
+	/**
+	 * getFall:
+	 * @Description This function will get a "year" parameter, an int[][] allRank parameter, and an int[][] allDiff parameter to 
+	 * find out the data of the year_fall1 and year_fall2 and rank_fall1 and rank_fall2 
+	 * @param int year1, int[][] allRanks, int[][] allDiff
+	 * @return int[]: all the essential numbers needed
+	 */
 	public static int[] getFall(int year1, int[][] allRanks, int[][] allDiff) {
 		int output[] = new int[5];
 		int rankFall = 0;
@@ -159,6 +230,13 @@ public class NameTrend {
 		return output;
 	}
 	
+	/**
+	 * getRise:
+	 * @Description This function will get a "year" parameter, an int[][] allRank parameter, and an int[][] allDiff parameter to 
+	 * find out the data of the year_rise1 and year_rise2 and rank_rise1 and rank_rise2 
+	 * @param int year1, int[][] allRanks, int[][] allDiff
+	 * @return int[]: all the essential numbers needed
+	 */
 	public static int[] getRise(int year1, int[][] allRanks, int[][] allDiff) {
 		int output[] = new int[5];
 		int rankRise = 0;
