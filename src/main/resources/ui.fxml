@@ -142,6 +142,9 @@
                               <TextArea fx:id="App1Report" layoutX="139.0" layoutY="25.0" prefHeight="80.0" prefWidth="376.0" text="Please type in the names and births of the parents andd the vintage year for the baby, we will then recommend you the best names!&#10;&#10;" wrapText="true" />
                               <Button fx:id="buttonTask4" layoutX="257.0" layoutY="243.0" mnemonicParsing="false" onAction="#getNameRecommendation" text="GENERATE" />
                               <Label layoutX="22.0" layoutY="262.0" text="* :  must filled" textFill="#e10e0e" />
+                              <Label layoutX="47.0" layoutY="164.0" text="(1880 - 2019)" />
+                              <Label layoutX="288.0" layoutY="164.0" text="(1880 - 2019)" />
+                              <Label layoutX="134.0" layoutY="208.0" text="(1880 - 2019)" />
                            </children>
                         </AnchorPane>
                     </content>
