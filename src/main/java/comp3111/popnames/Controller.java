@@ -270,7 +270,11 @@ public class Controller {
     		textAreaConsole.setText(Report);
     		return;
     	}
-    	
+    	else if(task1y1.getText().matches(".*\\s.*")|| task1y2.getText().matches(".*\\s.*") ||task1TopNum.getText().matches(".*\\s.*")) {
+    		Report += "There should not be any spaces in your input and please ensure you have typed correctly!";
+    		textAreaConsole.setText(Report);
+    		return;
+    	}
     	float numf = Float.parseFloat(task1TopNum.getText());
     	float year1f=Float.parseFloat(task1y1.getText());
     	float year2f=Float.parseFloat(task1y2.getText());
@@ -349,6 +353,11 @@ public class Controller {
     		textAreaConsole.setText(Report);
     		return; //empty input situation.
     	}
+    	else if(task4DadName.getText().matches(".*\\s.*") || task4MomName.getText().matches(".*\\s.*") || task4MomYOB.getText().matches(".*\\s.*") || task4DadYOB.getText().matches(".*\\s.*") || task4VintageYear.getText().matches(".*\\s.*")) {
+    		Report += "You should not type any white space and please ensure you have finished your input!";
+    		textAreaConsole.setText(Report);
+    		return; //empty input situation.
+    	}
     	float Dadyearf=Float.parseFloat(task4DadYOB.getText());
     	float Momyearf=Float.parseFloat(task4MomYOB.getText());
     	if(Dadyearf%1 != 0) {
@@ -363,8 +372,8 @@ public class Controller {
     	}
     	int Dadyear = Integer.parseInt(task4DadYOB.getText());
     	int Momyear = Integer.parseInt(task4MomYOB.getText());
-    	String Dadname = task4DadName.getText();
-    	String Momname = task4MomName.getText();
+    	String Dadname = task4DadName.getText().replaceAll("\\s+", "");
+    	String Momname = task4MomName.getText().replaceAll("\\s+", "");
     	int VinYear;
     	if(task4VintageYear.getText().equals("")) {
     		VinYear = 2019;
