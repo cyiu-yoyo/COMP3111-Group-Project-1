@@ -260,11 +260,19 @@ public class Controller {
      *It will detect some of the illegal inputs here and will then return a different report for the
      *user. Others detection of illegal inputs @see TopNamesForBirth.java.
      *@author Yao ZHANG
-     *@return the report itself
+     *@return no return
     */
     @FXML
     void getReport1() {
     	String Report = "";
+    	try {
+    	      Integer.parseInt(task1y1.getText());
+    	      Integer.parseInt(task1y2.getText());
+    	      Integer.parseInt(task1TopNum.getText());
+    	  } catch (NumberFormatException e) {
+    	   textAreaConsole.setText("Please provide legal number!");
+    	   return;
+    	  }
     	if(task1y1.getText().equals("") || task1y2.getText().equals("") ||task1TopNum.getText().equals("")) {
     		Report += "Something is missed and please ensure you have finished your input!";
     		textAreaConsole.setText(Report);
@@ -275,22 +283,7 @@ public class Controller {
     		textAreaConsole.setText(Report);
     		return;
     	}
-    	float numf = Float.parseFloat(task1TopNum.getText());
-    	float year1f=Float.parseFloat(task1y1.getText());
-    	float year2f=Float.parseFloat(task1y2.getText());
-    	if(numf%1 != 0) {
-    		Report = "The parameter Top N is a float which is not allowed! Please type again! \n";
-    	}
-    	if(year1f%1 != 0) {
-    		Report += "The parameter year1 is a float which is not allowed! Please type again! \n";
-    	}
-    	if(year2f%1 != 0) {
-    		Report += "The parameter year2 is a float which is not allowed! Please type again! \n";
-    	}
-    	if(!Report.equals("")) {
-    		textAreaConsole.setText(Report);
-    		return;
-    	}
+ 
     	int year1=Integer.parseInt(task1y1.getText());
     	int year2=Integer.parseInt(task1y2.getText());
     	int num=Integer.parseInt(task1TopNum.getText());
@@ -347,40 +340,34 @@ public class Controller {
     */
     @FXML
     void getNameRecommendation() {
+    	if(task4VintageYear.getText().equals("")) {
+    		task4VintageYear.setText("2019");
+    	}
+    	try {
+    	      Integer.parseInt(task4DadYOB.getText());
+    	      Integer.parseInt(task4MomYOB.getText());
+    	      //Integer.parseInt(task4VintageYear.getText());
+    	  } catch (NumberFormatException e) {
+    	   textAreaConsole.setText("Please provide legal number input and no spaces inside numbers is allowed!");
+    	   return;
+    	  }
     	String Report = "";
     	if(task4DadName.getText().equals("") || task4MomName.getText().equals("") ||task4DadYOB.getText().equals("") || task4MomYOB.getText().equals("")) {
     		Report += "Something is missed and please ensure you have finished your input!";
     		textAreaConsole.setText(Report);
     		return; //empty input situation.
     	}
-    	else if(task4DadName.getText().matches(".*\\s.*") || task4MomName.getText().matches(".*\\s.*") || task4MomYOB.getText().matches(".*\\s.*") || task4DadYOB.getText().matches(".*\\s.*") || task4VintageYear.getText().matches(".*\\s.*")) {
-    		Report += "You should not type any white space and please ensure you have finished your input!";
+    	else if(task4DadName.getText().matches(".*\\s.*") || task4MomName.getText().matches(".*\\s.*")) {
+    		Report += "You should not type any white space in the names and please ensure you have finished your input!";
     		textAreaConsole.setText(Report);
     		return; //empty input situation.
     	}
-    	float Dadyearf=Float.parseFloat(task4DadYOB.getText());
-    	float Momyearf=Float.parseFloat(task4MomYOB.getText());
-    	if(Dadyearf%1 != 0) {
-    		Report += "The parameter year1 is a float which is not allowed! Please type again! \n";
-    	}
-    	if(Momyearf%1 != 0) {
-    		Report += "The parameter year2 is a float which is not allowed! Please type again! \n";
-    	}
-    	if(!Report.equals("")) {
-    		textAreaConsole.setText(Report);
-    		return;
-    	}
     	int Dadyear = Integer.parseInt(task4DadYOB.getText());
     	int Momyear = Integer.parseInt(task4MomYOB.getText());
-    	String Dadname = task4DadName.getText().replaceAll("\\s+", "");
-    	String Momname = task4MomName.getText().replaceAll("\\s+", "");
+    	String Dadname = task4DadName.getText();
+    	String Momname = task4MomName.getText();
     	int VinYear;
-    	if(task4VintageYear.getText().equals("")) {
-    		VinYear = 2019;
-    	}
-    	else {
-    		VinYear = Integer.parseInt(task4VintageYear.getText());
-    	}
+    	VinYear = Integer.parseInt(task4VintageYear.getText());
     	Report = NameRecommendation.getBabyName(Dadyear, Momyear, Dadname,Momname, VinYear);
     	textAreaConsole.setText(Report);
     }
