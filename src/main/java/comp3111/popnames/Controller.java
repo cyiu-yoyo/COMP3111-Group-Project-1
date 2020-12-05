@@ -334,11 +334,11 @@ public class Controller {
     /**
      *Task One
      *To be triggered by the "Report" button on the Reporting1 Tab
-     *@description This function will get all the parameters from the UI and use them to finish the report.
+     *This function will get all the parameters from the UI and use them to finish the report.
      *It will detect some of the illegal inputs here and will then return a different report for the
-     *user. Others detection of illegal inputs @see TopNamesForBirth.java.
+     *user. Others detection of illegal inputs are in TopNamesForBirth.java
      *@author Yao ZHANG
-     *@return no return
+     *
     */
     @FXML
     void getReport1() {
@@ -382,11 +382,11 @@ public class Controller {
     /**
      *Task Two
      *To be triggered by the "Report" button on the Reporting 2 Tab
-     *@description This function will get all the parameters from the UI and use them to finish the report.
+     *This function will get all the parameters from the UI and use them to finish the report.
      *It will detect some of the illegal inputs here and will then return a different report for the
-     *user. Others detection of illegal inputs @see PopularityofName.java.
+     *user. Others detection of illegal inputs 
      *@author Lan Bo
-     *@return the report itself
+     *
     */
     @FXML
     void getReport2() {
@@ -421,11 +421,11 @@ public class Controller {
     /**
      *  Task 3
      *  To be triggered by the "Report" button on the Reporting 3 Tab
-     *  @description This function will get all parameters from the UI and use them to finish the report.
+     *  This function will get all parameters from the UI and use them to finish the report.
      *  If any of the inputs are incorrect or invalid, it will return a different report for the users.
-     *  For other illegal input detections, @see NameTrend.java.
+     *  For other illegal input detections,
      *  @author Yih CHENG
-     *  @return no return needed
+     * 
      */
     @FXML
     void task3_getReport() {
@@ -491,11 +491,11 @@ public class Controller {
     /**
      *Task Four
      *To be triggered by the "Recommed" button on the Application1 Tab
-     *@Description This function will get all the parameters from the UI and use them to finish the Recmonmendation.
+     *This function will get all the parameters from the UI and use them to finish the Recmonmendation.
      *It will detect some of the illegal inputs here and will then return a different report for the
-     *user. Other detection please @see NameRecommendation.java.
+     *user. Other detection are in NameRecommendation.java.
      *@author Yao ZHANG
-     *@return the report itself
+     *
     */
     @FXML
     void getNameRecommendation() {
@@ -534,11 +534,11 @@ public class Controller {
     /**
      *Task Five
      *To be triggered by the "Predict" button on the Application 2 Tab
-     *@Description This function will get all the parameters from the UI and use them to finish the Prediction.
+     *This function will get all the parameters from the UI and use them to finish the Prediction.
      *It will detect some of the illegal inputs here and will then return a different report for the
-     *user. Other detection please @see PredictPairs.java.
+     *user. Other detections are in PredictPairs.java.
      *@author Lan Bo
-     *@return the predicted mate's name
+     *
     */ 
     @FXML
     void predictmateName() {
@@ -583,11 +583,11 @@ public class Controller {
     /**
      *  Task 6
      *  To be triggered by the "Report" button on the Reporting 6 Tab
-     *  @description This function will get all parameters from the UI and use them to finish the report.
+     *  This function will get all parameters from the UI and use them to finish the report.
      *  If any of the inputs are incorrect or invalid, it will return a different report for the users.
-     *  For other illegal input detections, @see PredictScore.java.
+     *  For other illegal input detections, others are in PredictScore.java.
      *  @author Yih CHENG
-     *  @return no return needed
+     * 
      */
     @FXML
     void task6_getScore() {

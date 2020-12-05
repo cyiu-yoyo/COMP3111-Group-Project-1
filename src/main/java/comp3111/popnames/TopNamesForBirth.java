@@ -11,11 +11,12 @@ import edu.duke.*;
  */
 public class TopNamesForBirth {
 	/**
-     *getFileParsers:
-     *@Description This function will get parameters "year1" & "year2" from the UI and use them to get the corresponding
+     *getFileParsers
+     *This function will get parameters "year1" & "year2" from the UI and use them to get the corresponding
      *data.
-     *@params int year1; int year2
-     *@return parsers: the data files
+     *@param year1 the start year
+     *@param year2 the end year
+     *@return CSVParser the data files
     */ 
 	public static CSVParser[] getFileParsers(int year1, int year2) { //get the report
 		CSVParser parsers[] = new CSVParser[year2-year1+1];
@@ -28,21 +29,22 @@ public class TopNamesForBirth {
 	}
 	/**
      *getFileParsers:
-     *@Description This function  get the corresponding
-     *data.
-     *@params int year;
-     *@return parsers: the data file
+     *This function  get the corresponding data.
+     *@param year year to retrive the data file
+     *@return CSVParser the data file
     */ 
 	public static CSVParser getFileParser(int year) {
 	     FileResource fr = new FileResource(String.format("dataset/yob%s.csv", year));
 	     return fr.getCSVParser(false);
 		}
 	/**
-     *getNames:
-     *@Description This function  get the name list for the inRange year
-     *data.
-     *@params int year1, int year2, int num, String gender
-     *@return name array
+     *getNames
+     *This function  get the name list for the inRange year data.
+     *@param year1 the start year
+     *@param year2 the end year
+     *@param num the TopN 
+     *@param gender gender of interest
+     *@return namearray the 2D array for names
     */ 
 	public static String[][] getNames(int year1, int year2, int num, String gender){
 		//asume n is in range(n<1 or n is too large)
@@ -66,10 +68,13 @@ public class TopNamesForBirth {
 		return output;
 	}
 	/**
-     *checkInRange:
-     *@Description This function will check whether the range is legal or it is out of bound.
-     *@params int year1; int year2; int num; String gender
-     *@return boolean inRange;
+     *checkInRange
+     *This function will check whether the range is legal or it is out of bound.
+     *@param year1 start year
+     *@param year2 end year
+     *@param num TopN user input
+     *@param gender gender of user
+     *@return inRange whether it is inRange or not
     */ 
 	public static boolean checkInRange(int year1, int year2, int num, String gender) {
 		boolean inRange = true;
@@ -91,10 +96,11 @@ public class TopNamesForBirth {
 
 	}
 	/**
-     *getMaxnum:
-     *@Description A helper function to retrive the maximum number of names of a certain gender for a certain year;
-     *@params int year, String gender
-     *@return int Maximum;
+     *getMaxnum
+     *A helper function to retrive the maximum number of names of a certain gender for a certain year;
+     *@param year
+     *@param gender
+     *@return Maximum maximum number of distinct names
     */ 
 	public static int getMaxnum(int year, String gender) {
 		int Maxnum = 0;
@@ -106,10 +112,13 @@ public class TopNamesForBirth {
 		return Maxnum;
 	}
 	/**
-     *getReport1:
-     *@Description A function that will detect some of the illegal situations and generate corresponding reports 
-     *@params int year1, int year2, int num, String gender
-     *@return String report.
+     *getReport1
+     *A function that will detect some of the illegal situations and generate corresponding reports 
+     *@param year1 start year
+     *@param year2 end year
+     *@param num TopN that the user interested in
+     *@param gender the gender that the user interested in
+     *@return report conlusion and report about N most popular names.
     */ 
 	public static String getReport1(int year1, int year2, int num, String gender) {
 		int range = year2 - year1 + 1;

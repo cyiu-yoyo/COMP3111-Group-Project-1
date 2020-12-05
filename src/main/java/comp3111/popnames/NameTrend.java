@@ -16,9 +16,9 @@ public class NameTrend {
 	// same as in task0
 	/**
 	 * getFileParser:
-	 * @Description This function will get a "year "parameter from the UI and use it to get the corresponding
+	 * This function will get a "year "parameter from the UI and use it to get the corresponding
 	 * data.
-	 * @param int year;
+	 * @param year: input year
 	 * @return parser: a data file
 	 */
 	public static CSVParser getFileParser(int year) {
@@ -28,9 +28,10 @@ public class NameTrend {
 	
 	/**
 	 * getFileParsers:
-	 * @Description This function will get year parameters "year1" & "year2" from the UI and use it to get the corresponding
+	 * This function will get year parameters "year1" and "year2" from the UI and use it to get the corresponding
 	 * data.
-	 * @param int year1; int year2;
+	 * @param year1: input year1
+	 * @param year2: input year2
 	 * @return parsers: the data files
 	 */
 	public static CSVParser [] getFileParsers(int year1, int year2) {  // get data
@@ -45,10 +46,11 @@ public class NameTrend {
 	
 	/**
 	 * get_unique_people:
-	 * @Description This function will take parameters "year" and "gender", and use them to 
-	 * get the number of names of people with gender "gender" and borned in year "year".
-	 * @param int year; String gender
-	 * @return int: unique_people
+	 * This function will take parameters "year" and "gender", and use them to 
+	 * get the number of names of people with gender "gender" and born in year "year".
+	 * @param year: birth year of user
+	 * @param gender: gender of user
+	 * @return unique_people: how many different names in this year
 	 */
 	public static int get_unique_people(int year, String gender) {
 		int unique_people=0;
@@ -63,10 +65,12 @@ public class NameTrend {
 	// same as in task0
 	/**
 	 * getRank:
-	 * @Description This function will get a year parameter "year" and a String name and a String gender and use it to get 
+	 * This function will get a year parameter "year" and a String name and a String gender and use it to get 
 	 * the rank of name "name", gender "gender" in year "year".
-	 * @param int year; String name; String gender
-	 * @return int: rank
+	 * @param year: birth year of user
+	 * @param name: name of the user
+	 * @param gender: gender of user	
+	 * @return oRank: rank of the name of the year
 	 */
 	public static int getRank(int year, String name, String gender) {
 		if (year < 1880 || year > 2019) {
@@ -96,10 +100,13 @@ public class NameTrend {
 	
 	/**
 	 * getNameList:
-	 * @Description This function will get year parameters "year1" & "year2" and the "gender" and Top "N" and use it to get a list of  
-	 * names taht remained in rank N within "year1" & "year2" and of gender "gender"
-	 * @param int year1; int year2; String gender; int N;
-	 * @return Vector<String>: vector of names
+	 * This function will get year parameters "year1" and "year2" and the "gender" and Top "N" and use it to get a list of  
+	 * names that remained in rank N within "year1" and "year2" and of gender "gender"
+	 * @param year1: input year1
+	 * @param year2: input year2
+	 * @param gender: input gender
+	 * @param N: input N
+	 * @return output: Vector of names
 	 */
 	public static Vector<String> getNameList(int year1, int year2, String gender, int N) {
 		Vector<String> output = new Vector<String>();
@@ -147,10 +154,13 @@ public class NameTrend {
 	
 	/**
 	 * getAllRanks:
-	 * @Description This function will get two year parameters "year1" & "year2", a String gender, and a Vector<String>  
-	 * nameList from the UI and get the rank of every name in nameList within every year "year1" & "year2".
-	 * @param int year1; int year2; String gender; Vector<String> nameList
-	 * @return 2D array: all rank arrays
+	 * This function will get two year parameters "year1" and "year2", a String gender, and a Vector
+	 * nameList from the UI and get the rank of every name in nameList within every year "year1" and "year2".
+	 * @param year1: input year1
+	 * @param year2: input year2
+	 * @param gender: input gender
+	 * @param nameList: nameList from getNameList
+	 * @return rankArray: all rank arrays
 	 */
 	public static int[][] getAllRanks(int year1, int year2, String gender, Vector<String> nameList) {
 		int rankArray[][] = new int[nameList.size()][year2 - year1 + 1];
@@ -165,10 +175,12 @@ public class NameTrend {
 	
 	/**
 	 * getHighestRanks:
-	 * @Description This function will get one year parameters "year1", a int[][] rankArray, and a int N
+	 * This function will get one year parameters "year1", a int[][] rankArray, and a int N
 	 * from the UI and rank data we need for the report.
-	 * @param int year1; int[][] rankArray; int N;
-	 * @return 2D array: all rank arrays
+	 * @param year1: input year1
+	 * @param rankArray: rankArray from getAllRanks
+	 * @param N: input N
+	 * @return array: data needed for report
 	 */
 	public static int[][] getHighestRanks(int year1, int[][] rankArray, int N) {
 		int array[][] = new int[rankArray.length][4];
@@ -197,9 +209,9 @@ public class NameTrend {
 	
 	/**
 	 * grossTrend:
-	 * @Description This function will get an int[][] array and output a String[] containing the trends of every name
-	 * @param int[][] array; 
-	 * @return String array: trends
+	 * This function will get an int[][] array and output a String[] containing the trends of every name
+	 * @param array: array from getHighestRanks
+	 * @return output: all Trends
 	 */
 	public static String[] grossTrend(int[][] array) {
 		String[] output = new String[array.length];

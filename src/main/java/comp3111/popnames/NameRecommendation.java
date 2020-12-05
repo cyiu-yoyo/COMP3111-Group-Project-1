@@ -7,16 +7,15 @@ import edu.duke.*;
  *Task4 Program
  *Main Class for the Application1 that can generate recommended names for newborn babies based 
  *on their parents' names and brth year.
- *@author     <a href=mailto:yzhanghf@connect.ust.hk>Yao Zhang</a>
- *@version    1.0
+ *@author  <a href=mailto:yzhanghf@connect.ust.hk>Yao Zhang</a>
+ *@version 1.0
  */
 public class NameRecommendation {
 	/**
      *getFileParsers:
-     *@Description This function  get the corresponding
-     *data.
-     *@params int year;
-     *@return parsers: the data file
+     *This function get the corresponding data.
+     *@param year birth year of the user
+     *@return CSVParser the data file
     */ 
 	public static CSVParser getFileParser(int year) {
      FileResource fr = new FileResource(String.format("dataset/yob%s.csv", year));
@@ -25,8 +24,10 @@ public class NameRecommendation {
 	/**
      *getRank:
      *@Description This function  get the rank for a certain name for a certain gender in a certain year
-     *@params int year, String name, String gender 
-     *@return int ranking
+     *@param year birth year of the user
+	 *@param name name of the user 
+	 *@param gender gender of the user
+     *@return ranking the rank of a certain name of certain gender in certain year
     */ 	
 	 public static int getRank(int year, String name, String gender) {
 	     boolean found = false;
@@ -51,10 +52,12 @@ public class NameRecommendation {
 	 }
 	 
 	 /**
-	     *getName:
-	     *@Description This function  get the Name for a certain rank for a certain gender in a certain year
-	     *@params int year, int rank, String gender 
-	     *@return String name
+	     *getName
+	     *This function  get the Name for a certain rank for a certain gender in a certain year
+	     *@param year birth year of user
+	     *@param rank ranking of a name of a gender of a certain year
+	     *@param gender gender of user
+	     *@return name the name of a rank of a gender in a certain year
 	    */ 	
 	 public static String getName(int year, int rank, String gender) {
 	 	boolean found = false;
@@ -80,10 +83,12 @@ public class NameRecommendation {
 	     	return "information on the name at the specified rank is not available";
 	 }
 	 /**
-	     *getMaxnum:
-	     *@Description A helper function to retrive the maximum number of names of a certain gender for a certain year;
-	     *@params int year, String gender
-	     *@return int Maximum;
+	     *getMaxnum
+	     *A helper function to retrive the maximum number of names of a certain gender
+	     *for a certain year;
+	     *@param year the year of birth
+	     *@param gender the gender of the user
+	     *@return Maxnum the maximum number of distinct names of a certain year
 	    */ 
 	 public static int getMaxnum(int year, String gender) {
 			int Maxnum = 0;
@@ -95,11 +100,15 @@ public class NameRecommendation {
 			return Maxnum;
 		}
 	 /**
-	     *getBabyName:
-	     *@Description This function try to generate the recommended names for babys and it
+	     *getBabyName
+	     *This function try to generate the recommended names for babys and it
 	     *will do some illegal situation detection as well.
-	     *@params int Dadyear, int Momyear, String Dadname, String Momname, int Vintageyear 
-	     *@return String report of the recommended names
+	     *@param Dadyear birth year of father
+	     *@param Momyear birth year of mother
+	     *@param Dadname name of father
+	     *@param Momname name of mother
+	     *@param Vintageyear vintage year for the baby's name
+	     *@return report report and conclusion of the recommended names
 	    */ 
 	 public static String getBabyName(int Dadyear, int Momyear, String Dadname, String Momname, int Vintageyear) {
 		 if(Dadyear < 1880 || Dadyear > 2019 || Momyear < 1880 || Momyear > 2019 ) {
