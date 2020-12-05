@@ -111,7 +111,7 @@
                                     <TextField fx:id="task3_textYear1" layoutX="236.0" layoutY="132.0" prefHeight="27.0" prefWidth="55.0" text="1941" />
                                     <Label layoutX="298.0" layoutY="136.0" text="to" />
                                     <Button fx:id="task3_buttonReport" layoutX="112.0" layoutY="207.0" mnemonicParsing="false" onAction="#task3_getReport" prefHeight="27.0" prefWidth="176.0" text="Get REPORT" />
-                                    <TextField fx:id="task3_textN" layoutX="236.0" layoutY="168.0" prefHeight="27.0" prefWidth="55.0" text="4" />
+                                    <TextField fx:id="task3_textN" layoutX="236.0" layoutY="168.0" prefHeight="27.0" prefWidth="55.0" text="10" />
                                     <Label layoutX="152.0" layoutY="173.0" text="Top N (N&gt;0):" />
                                  </children>
                               </AnchorPane>
