@@ -44,17 +44,17 @@ public class JavaFXTest extends ApplicationTest {
 	}
 	
 	
-	@Test
-	public void testButtonRankFalse() {	
-		//clickOn("#tabTaskZero");
-		clickOn("#buttonRankM");
-		//sleep(1000);
-		String s1 = t.getText();
-		clickOn("#buttonRankF");
-		//sleep(1000);
-		String s2 = t.getText();
-		assertFalse(s1.equals(s2));
-	}
+//	@Test
+//	public void testButtonRankFalse() {	
+//		//clickOn("#tabTaskZero");
+//		clickOn("#buttonRankM");
+//		//sleep(1000);
+//		String s1 = t.getText();
+//		clickOn("#buttonRankF");
+//		//sleep(1000);
+//		String s2 = t.getText();
+//		assertFalse(s1.equals(s2));
+//	}
 	
 	
 	@Test

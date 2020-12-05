@@ -192,6 +192,9 @@ public class Controller {
     private ToggleGroup T5;
     
     @FXML
+    private TextField task3_textN;
+    
+    @FXML
     private TextField task3_textYear1;
     
     @FXML
@@ -416,69 +419,74 @@ public class Controller {
     	textAreaConsole.setText(Report);
     }
     /**
-    *  Task 3
-    *  To be triggered by the "Report" button on the Reporting 3 Tab
-    *  @description This function will get all parameters from the UI and use them to finish the report.
-    *  If any of the inputs are incorrect or invalid, it will return a different report for the users.
-    *  For other illegal input detections, @see NameTrend.java.
-    *  @author Yih CHENG
-    *  @return no return needed
-    */
-   @FXML
-   void task3_getReport() {
-   	String report = "", brief = "";
-   	int year1=Integer.parseInt(task3_textYear1.getText());
-   	int year2=Integer.parseInt(task3_textYear2.getText());
-   	try {
-   		Integer.parseInt(task3_textYear1.getText());
-   	} catch (NumberFormatException e) {
-   		textAreaConsole.setText("The input is incorrect. Please enter a valid input!");
-   		return;
-   	}
-   	try { 
-   		Integer.parseInt(task3_textYear2.getText());
-   	} catch (NumberFormatException e) {
-   		textAreaConsole.setText("The input is incorrect. Please enter a valid input!");
-   		return;
-   	}
+     *  Task 3
+     *  To be triggered by the "Report" button on the Reporting 3 Tab
+     *  @description This function will get all parameters from the UI and use them to finish the report.
+     *  If any of the inputs are incorrect or invalid, it will return a different report for the users.
+     *  For other illegal input detections, @see NameTrend.java.
+     *  @author Yih CHENG
+     *  @return no return needed
+     */
+    @FXML
+    void task3_getReport() {
+     String report = "", brief = "";
+     int year1=Integer.parseInt(task3_textYear1.getText());
+     int year2=Integer.parseInt(task3_textYear2.getText());
+     int N=Integer.parseInt(task3_textN.getText());
+     try {
+      Integer.parseInt(task3_textYear1.getText());
+     } catch (NumberFormatException e) {
+      textAreaConsole.setText("The input is incorrect. Please enter a valid input!");
+      return;
+     }
+     try { 
+      Integer.parseInt(task3_textYear2.getText());
+     } catch (NumberFormatException e) {
+      textAreaConsole.setText("The input is incorrect. Please enter a valid input!");
+      return;
+     }
+     try { 
+      Integer.parseInt(task3_textN.getText());
+     } catch (NumberFormatException e) {
+      textAreaConsole.setText("The input N is incorrect. Please enter a valid input!");
+      return;
+     }
 
-   	
-   	String gender="";
-   	if(task3_buttonMale.isSelected()){
-   		gender="M";
-   	}
-   	else{
-   		gender="F";
-   	}
-   	Vector<String> nameList = NameTrend.getNameList(year1, year2, gender);
-   	if (nameList.size() == 1) {
-   		textAreaConsole.setText(nameList.get(0));
-   		return;
-   	}
-   	int[][] allRanks = NameTrend.getAllRanks(year1, year2, gender, nameList);
-   	int[][] allDiff = NameTrend.getDifference(year1, year2, gender, allRanks);
-   	String name_rise = NameTrend.getRiseName(nameList, allDiff);
-   	String name_fall = NameTrend.getFallName(nameList, allDiff);
-   	int rise[] = NameTrend.getRise(year1, allRanks, allDiff);
-   	int fall[] = NameTrend.getFall(year1, allRanks, allDiff);
-   	
-   	brief = String.format("%s is found to have shown the largest rise in popularity from rank %d in year %d to rank %d in year %d. "
-   			+ "On the other hand, %s is found to have shown the largest fall in popularity from rank %d in year %d to rank %d "
-   			+ "in year %d.", name_rise, rise[0], rise[1], rise[2], rise[3], name_fall, fall[0], fall[1], fall[2], fall[3]);
-   	
-   	report += "Name             Lowest Rank            Highest Rank              Trend";
-   	report += "\n";
-   	report += "                            [in year]                          [in year]                     ";
-   	report += "\n";
-   	
-   	report += String.format("%s          %d  [ %d ]          %d  [ %d ]          %d ranks up", name_rise, rise[0], rise[1], rise[2], rise[3], rise[4]);
-   	report += "\n";
-   	
-   	report += String.format("%s          %d  [ %d ]          %d  [ %d ]          %d ranks down", name_fall, fall[0], fall[1], fall[2], fall[3], fall[4]);
-   	
-   	task3_textSummary.setText(brief);
-   	textAreaConsole.setText(report);
-   }
+     
+     String gender="";
+     if(task3_buttonMale.isSelected()){
+      gender="M";
+     }
+     else{
+      gender="F";
+     }
+     Vector<String> nameList = NameTrend.getNameList(year1, year2, gender, N);
+     if (nameList.size() == 1) {
+    	 report += nameList.get(0);
+    	 brief += "";
+         textAreaConsole.setText(report);
+         task3_textSummary.setText(brief);
+         return;
+     }
+     int[][] allRanks = NameTrend.getAllRanks(year1, year2, gender, nameList);
+     int[][] lowhighranks = NameTrend.getHighestRanks(year1, allRanks, N);
+     String[] trend = NameTrend.grossTrend(lowhighranks);
+     
+     brief = String.format("%d names are found to be maintained at a high level of popularity within Top %d over the period from year %d to year %d.", 
+       nameList.size(), N, year1, year2);
+     
+     report += "Name   Lowest Rank[in year]   Highest Rank[in year]   Gross Trend";
+     report += "\n";
+     for (int i=0; i < nameList.size(); i++) {
+      report += String.format("%s                  %d  [ %d ]                  %d  [ %d ]                 %s", nameList.get(i), lowhighranks[i][0], lowhighranks[i][1], 
+        lowhighranks[i][2], lowhighranks[i][3], trend[i]);
+         report += "\n";
+     }
+
+     task3_textSummary.setText(brief);
+     textAreaConsole.setText(report);
+    }
+    
     
     /**
      *Task Four
@@ -653,9 +661,9 @@ public class Controller {
     		textAreaConsole.setText(report);
     		return;
     	}
-    	double oScore = PredictScores.get_oScore(oRank, oRankMate, iYOB, oYOB, iGender, iGenderMate);
+    	String oScore = PredictScores.get_oScore(oRank, oRankMate, iYOB, oYOB, iGender, iGenderMate);
     	
-    	report += String.format("The compatibility of you, %s, and your mate, %s, is %.2f%%.", iName, iNameMate, oScore);
+    	report += String.format("The compatibility of you, %s, and your mate, %s, is %s%%.", iName, iNameMate, oScore);
     	
     	textAreaConsole.setText(report);
     }

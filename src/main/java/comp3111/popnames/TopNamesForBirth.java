@@ -116,7 +116,7 @@ public class TopNamesForBirth {
 		}
 		boolean inrange = checkInRange(year1,year2,num,gender);
 		if(inrange == false) {
-			return "the parameter Top N is illegal, please type again! ";
+			return "The parameter Top N is illegal(<1 or > the number of total distinct names in the period), please type again!";
 		}
 		String report="";
 		String Names[][]=getNames(year1,year2,num,gender);
@@ -170,3 +170,4 @@ public class TopNamesForBirth {
 		return report;
 	}
 }
+

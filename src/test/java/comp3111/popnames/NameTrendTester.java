@@ -17,6 +17,15 @@ public class NameTrendTester {
 	@After
 	public void tearDown() throws Exception {
 	}
+	
+	// get_unique_people
+	
+    @Test 
+    public void testget_unique_people() {
+    	NameTrend a = new NameTrend();
+    	int i = a.get_unique_people(2019, "F");
+    	assertTrue(i==17905);
+    }
 
 	// getRank
 	
@@ -70,182 +79,203 @@ public class NameTrendTester {
     }
     
     
-    //getNameList
+    // getNameList
     
     @Test 
     public void testGetNameListNotFound1() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(1945, 1941, "M");
+    	Vector<String> i = a.getNameList(1945, 1941, "M", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure the second year is larger than the first year!");
     }
     
     @Test 
     public void testGetNameListNotFound2() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(2021, 2020, "M");
+    	Vector<String> i = a.getNameList(2021, 2020, "M", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure the second year is larger than the first year!");
     }
     
     @Test 
     public void testGetNameListNotFound3() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(1879, 1870, "M");
+    	Vector<String> i = a.getNameList(1879, 1870, "M", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure the second year is larger than the first year!");
     }
     
     @Test 
     public void testGetNameListNotFound4() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(1900, 1879, "M");
+    	Vector<String> i = a.getNameList(1900, 1879, "M", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure the second year is larger than the first year!");
     }
 
     @Test 
     public void testGetNameListNotFound5() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(2020, 1900, "M");
+    	Vector<String> i = a.getNameList(2020, 1900, "M", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure the second year is larger than the first year!");
     }
     
     @Test 
     public void testGetNameListNotFound6() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(2020, 1879, "M");
+    	Vector<String> i = a.getNameList(2020, 1879, "M", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure the second year is larger than the first year!");
     }
     
     @Test 
     public void testGetNameListNotFound7() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(1879, 2020, "M");
+    	Vector<String> i = a.getNameList(1879, 2020, "M", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure both years are in range 1880 to 2019!");
     }
     
     @Test 
     public void testGetNameListNotFound8() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(2020, 2021, "M");
+    	Vector<String> i = a.getNameList(2020, 2021, "M", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure both years are in range 1880 to 2019!");
     }
     
     @Test 
     public void testGetNameListNotFound9() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(1870, 1879, "M");
+    	Vector<String> i = a.getNameList(1870, 1879, "M", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure both years are in range 1880 to 2019!");
     }
     
     @Test 
     public void testGetNameListNotFound10() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(1879, 1900, "M");
+    	Vector<String> i = a.getNameList(1879, 1900, "M", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure both years are in range 1880 to 2019!");
     }
 
     @Test 
     public void testGetNameListNotFound11() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(1900, 2020, "M");
+    	Vector<String> i = a.getNameList(1900, 2020, "M", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure both years are in range 1880 to 2019!");
     }
     
     @Test 
     public void testGetNameListNotFound1F() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(1945, 1941, "F");
+    	Vector<String> i = a.getNameList(1945, 1941, "F", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure the second year is larger than the first year!");
     }
     
     @Test 
     public void testGetNameListNotFound2F() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(2021, 2020, "F");
+    	Vector<String> i = a.getNameList(2021, 2020, "F", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure the second year is larger than the first year!");
     }
     
     @Test 
     public void testGetNameListNotFound3F() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(1879, 1870, "F");
+    	Vector<String> i = a.getNameList(1879, 1870, "F", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure the second year is larger than the first year!");
     }
     
     @Test 
     public void testGetNameListNotFound4F() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(1900, 1879, "F");
+    	Vector<String> i = a.getNameList(1900, 1879, "F", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure the second year is larger than the first year!");
     }
 
     @Test 
     public void testGetNameListNotFound5F() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(2020, 1900, "F");
+    	Vector<String> i = a.getNameList(2020, 1900, "F", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure the second year is larger than the first year!");
     }
     
     @Test 
     public void testGetNameListNotFound6F() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(2020, 1879, "F");
+    	Vector<String> i = a.getNameList(2020, 1879, "F", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure the second year is larger than the first year!");
     }
     
     @Test 
     public void testGetNameListNotFound7F() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(1879, 2020, "F");
+    	Vector<String> i = a.getNameList(1879, 2020, "F", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure both years are in range 1880 to 2019!");
     }
     
     @Test 
     public void testGetNameListNotFound8F() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(2020, 2021, "F");
+    	Vector<String> i = a.getNameList(2020, 2021, "F", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure both years are in range 1880 to 2019!");
     }
     
     @Test 
     public void testGetNameListNotFound9F() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(1870, 1879, "F");
+    	Vector<String> i = a.getNameList(1870, 1879, "F", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure both years are in range 1880 to 2019!");
     }
     
     @Test 
     public void testGetNameListNotFound10F() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(1879, 1900, "F");
+    	Vector<String> i = a.getNameList(1879, 1900, "F", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure both years are in range 1880 to 2019!");
     }
 
     @Test 
     public void testGetNameListNotFound11F() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(1900, 2020, "F");
+    	Vector<String> i = a.getNameList(1900, 2020, "F", 10);
     	assertEquals(i.get(0), "Wrong input! Please make sure both years are in range 1880 to 2019!");
+    }
+    
+    @Test 
+    public void testGetNameListNotFoundxx() {
+    	NameTrend a = new NameTrend();
+    	Vector<String> i = a.getNameList(1900, 1920, "F", -1);
+    	assertEquals(i.get(0), "Wrong input! Please make sure N is larger or equal to 1!");
     }
     
     @Test 
     public void testGetNameList1() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(2000, 2019, "M");
-    	assertEquals(i.get(0), "Jacob");
+    	Vector<String> i = a.getNameList(1941, 1945, "M", 10);
+    	assertEquals(i.get(0), "James");
     }
     
     @Test 
     public void testGetNameList2() {
     	NameTrend a = new NameTrend();
-    	Vector<String> i = a.getNameList(2000, 2019, "F");
-    	assertEquals(i.get(0), "Emily");
+    	Vector<String> i = a.getNameList(1941, 1945, "F", 10);
+    	assertEquals(i.get(0), "Mary");
     }
     
-    // getAllRanks
+    @Test 
+    public void testGetNameList3() {
+    	NameTrend a = new NameTrend();
+    	Vector<String> i = a.getNameList(1941, 1942, "F", 100000);
+    	assertEquals(i.get(0), "Wrong input! Your input N is too large. Please make it smaller!");
+    }
     
+    @Test 
+    public void testGetNameList4() {
+    	NameTrend a = new NameTrend();
+    	Vector<String> i = a.getNameList(1941, 1950, "M", 20);
+    	assertEquals(i.get(0), "James");
+    }
+//    
+//    // getAllRanks
+//    
     @Test 
     public void testGetAllRanks1() {
     	NameTrend a = new NameTrend();
-    	Vector<String> b = a.getNameList(1941, 1945, "M");
+    	Vector<String> b = a.getNameList(1941, 1945, "M", 10);
     	int[][] i = a.getAllRanks(1941, 1945, "M", b);
     	assertTrue(i[6][0]==7);
     }
@@ -253,139 +283,41 @@ public class NameTrendTester {
     @Test 
     public void testGetAllRanks2() {
     	NameTrend a = new NameTrend();
-    	Vector<String> b = a.getNameList(1941, 1945, "M");
+    	Vector<String> b = a.getNameList(1941, 1945, "M", 10);
     	int[][] i = a.getAllRanks(1941, 1945, "M", b);
     	assertTrue(i[6][1]==6);
     }
     
-    // getDifference
+    
+    // getHighestRanks
     
     @Test 
-    public void testGetDifference1() {
+    public void testGetHighestRanks1() {
     	NameTrend a = new NameTrend();
-    	Vector<String> b = a.getNameList(1941, 1945, "M");
+    	Vector<String> b = a.getNameList(1941, 1945, "M", 10);
     	int[][] i = a.getAllRanks(1941, 1945, "M", b);
-    	int[][] j = a.getDifference(1941, 1945, "M", i);
-    	assertTrue(j[6][0]==0);
+    	int[][] j = a.getHighestRanks(1941, i, 10);
+    	assertTrue(j[0][0]==1);
     }
-    
+
     @Test 
-    public void testGetDifference2() {
+    public void testGetHighestRanks2() {
     	NameTrend a = new NameTrend();
-    	Vector<String> b = a.getNameList(1941, 1945, "M");
+    	Vector<String> b = a.getNameList(1941, 1945, "M", 10);
     	int[][] i = a.getAllRanks(1941, 1945, "M", b);
-    	int[][] j = a.getDifference(1941, 1945, "M", i);
-    	assertTrue(j[6][1]==-1);
+    	int[][] j = a.getHighestRanks(1941, i, 10);
+    	assertTrue(i[6][0]==7);
     }
     
-    // getFallName
-    
+    // grosstrend
     @Test 
-    public void testGetFallName1() {
+    public void testgrosstrend() {
     	NameTrend a = new NameTrend();
-    	Vector<String> b = a.getNameList(1941, 1945, "M");
+    	Vector<String> b = a.getNameList(1941, 1945, "M", 10);
     	int[][] i = a.getAllRanks(1941, 1945, "M", b);
-    	int[][] j = a.getDifference(1941, 1945, "M", i);
-    	String k = a.getFallName(b, j);
-    	assertEquals(k, "Tyrus");
+    	int[][] j = a.getHighestRanks(1941, i, 10);
+    	String[] k = a.grossTrend(j);
+    	assertEquals(k[0], "FLAT");
     }
-    
-    // getRiseName
-    
-    @Test 
-    public void testGetRiseName1() {
-    	NameTrend a = new NameTrend();
-    	Vector<String> b = a.getNameList(1941, 1945, "M");
-    	int[][] i = a.getAllRanks(1941, 1945, "M", b);
-    	int[][] j = a.getDifference(1941, 1945, "M", i);
-    	String k = a.getRiseName(b, j);
-    	assertEquals(k, "Macarthur");
-    }
-    
-    // getFall
-    
-    @Test 
-    public void testFall1() {
-    	NameTrend a = new NameTrend();
-    	Vector<String> b = a.getNameList(1941, 1945, "M");
-    	int[][] i = a.getAllRanks(1941, 1945, "M", b);
-    	int[][] j = a.getDifference(1941, 1945, "M", i);
-    	int[] k = a.getFall(1941, i, j);
-    	assertTrue(k[0]==1693);
-    }
-    
-    // getFall
-    
-    @Test 
-    public void testFall2() {
-    	NameTrend a = new NameTrend();
-    	Vector<String> b = a.getNameList(1943, 1945, "M");
-    	int[][] i = a.getAllRanks(1943, 1945, "M", b);
-    	int[][] j = a.getDifference(1943, 1945, "M", i);
-    	int[] k = a.getFall(1943, i, j);
-    	assertTrue(k[1]==1943);
-    }
-    
-    @Test 
-    public void testFall3() {
-    	NameTrend a = new NameTrend();
-    	Vector<String> b = a.getNameList(1941, 1945, "M");
-    	int[][] i = a.getAllRanks(1941, 1945, "M", b);
-    	int[][] j = a.getDifference(1941, 1945, "M", i);
-    	int[] k = a.getFall(1941, i, j);
-    	assertTrue(k[2]==3867);
-    }
-    
-    @Test 
-    public void testFall4() {
-    	NameTrend a = new NameTrend();
-    	Vector<String> b = a.getNameList(1941, 1945, "M");
-    	int[][] i = a.getAllRanks(1941, 1945, "M", b);
-    	int[][] j = a.getDifference(1941, 1945, "M", i);
-    	int[] k = a.getFall(1941, i, j);
-    	assertTrue(k[3]==1944);
-    }
-    
-    // getRise
-    
-    @Test 
-    public void testRise1() {
-    	NameTrend a = new NameTrend();
-    	Vector<String> b = a.getNameList(1941, 1945, "M");
-    	int[][] i = a.getAllRanks(1941, 1945, "M", b);
-    	int[][] j = a.getDifference(1941, 1945, "M", i);
-    	int[] k = a.getRise(1941, i, j);
-    	assertTrue(k[0]==3816);
-    }
-    
-    @Test 
-    public void testRise2() {
-    	NameTrend a = new NameTrend();
-    	Vector<String> b = a.getNameList(1941, 1945, "M");
-    	int[][] i = a.getAllRanks(1941, 1945, "M", b);
-    	int[][] j = a.getDifference(1941, 1945, "M", i);
-    	int[] k = a.getRise(1941, i, j);
-    	assertTrue(k[1]==1941);
-    }
-    
-    @Test 
-    public void testRise3() {
-    	NameTrend a = new NameTrend();
-    	Vector<String> b = a.getNameList(1941, 1945, "M");
-    	int[][] i = a.getAllRanks(1941, 1945, "M", b);
-    	int[][] j = a.getDifference(1941, 1945, "M", i);
-    	int[] k = a.getRise(1941, i, j);
-    	assertTrue(k[2]==513);
-    }
-    
-    @Test 
-    public void testRise4() {
-    	NameTrend a = new NameTrend();
-    	Vector<String> b = a.getNameList(1941, 1945, "M");
-    	int[][] i = a.getAllRanks(1941, 1945, "M", b);
-    	int[][] j = a.getDifference(1941, 1945, "M", i);
-    	int[] k = a.getRise(1941, i, j);
-    	assertTrue(k[3]==1942);
-    }
-    
+      
 }

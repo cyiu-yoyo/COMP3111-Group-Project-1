@@ -37,7 +37,7 @@ public class TopNamesForBirthTest {
 	public void testGetRepot2() {
 		TopNamesForBirth a = new TopNamesForBirth();
 		String i = a.getReport1(2000,2010,-2,"M");
-		assertEquals(i,"the parameter Top N is illegal, please type again! ");
+		assertEquals(i,"The parameter Top N is illegal(<1 or > the number of total distinct names in the period), please type again!");
 	}
 	@Test
 	public void testGetRepot3() {

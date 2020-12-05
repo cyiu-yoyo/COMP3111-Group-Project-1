@@ -2,6 +2,7 @@ package comp3111.popnames;
 
 import org.apache.commons.csv.*;
 import edu.duke.*;
+import java.text.DecimalFormat;
 
 public class PredictScores {
 	// same as in task0
@@ -124,13 +125,15 @@ public class PredictScores {
 	 * @Description This function will use rank "oRank" and rank "oRankMate", "iYOB" and "oYOB", and "iGender" and "iMateGender"
 	 * and use them to get the score of the compatibility between you and your mate.
 	 * @param int oRank; int oRankMate, int iYOB, int oYOB, String iGender, String iMateGender
-	 * @return int: oScore
+	 * @return string: final score
 	 */
-	public static double get_oScore(int oRank, int oRankMate, int iYOB, int oYOB, String iGender, String iMateGender) {
+	public static String get_oScore(int oRank, int oRankMate, int iYOB, int oYOB, String iGender, String iMateGender) {
 		int rank_total_1 = get_unique_people(iYOB, iGender);
 		int rank_total_2 = get_unique_people(oYOB, iMateGender);
 		double oScore = (1.0 - Math.abs(((1.0 * oRank - (1.0 * oRankMate))*2)/(rank_total_1+rank_total_2))) * 100;
-		return oScore;
+		DecimalFormat df = new DecimalFormat("#.##");
+		String score = df.format(oScore);
+		return score;
 	}
 	
 }
