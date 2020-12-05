@@ -17,4 +17,4 @@
 > Task 2 & Task 5
 
 ## Required Documents
-All required documents are in "All Documents.pdf" and the javadoc link is in the "doc" folder
+All required documents are in [All Documents.pdf](https://github.com/blanaa/COMP3111-Group-Project/blob/master/All%20Documents.pdf) and the javadoc link is in the [doc](https://github.com/blanaa/COMP3111-Group-Project/tree/master/doc) folder
