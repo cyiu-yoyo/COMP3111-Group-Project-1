@@ -430,9 +430,6 @@ public class Controller {
     @FXML
     void task3_getReport() {
      String report = "", brief = "";
-     int year1=Integer.parseInt(task3_textYear1.getText());
-     int year2=Integer.parseInt(task3_textYear2.getText());
-     int N=Integer.parseInt(task3_textN.getText());
      try {
       Integer.parseInt(task3_textYear1.getText());
      } catch (NumberFormatException e) {
@@ -451,6 +448,9 @@ public class Controller {
       textAreaConsole.setText("The input N is incorrect. Please enter a valid input!");
       return;
      }
+     int year1=Integer.parseInt(task3_textYear1.getText());
+     int year2=Integer.parseInt(task3_textYear2.getText());
+     int N=Integer.parseInt(task3_textN.getText());
 
      
      String gender="";
@@ -601,13 +601,13 @@ public class Controller {
     	else {
     		iGender = "F";
     	}
-    	int iYOB = Integer.parseInt(task6_textBirthYear.getText());
     	try {
     		Integer.parseInt(task6_textBirthYear.getText());
     	} catch (NumberFormatException e) {
     		textAreaConsole.setText("The input is incorrect. Please enter a valid input!");
     		return;
     	}
+    	int iYOB = Integer.parseInt(task6_textBirthYear.getText());
     	String iNameMate = task6_textMateName.getText();
     	String iGenderMate = "";
     	if(task6_buttonMale2.isSelected()){
