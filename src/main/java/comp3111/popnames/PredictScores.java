@@ -2,14 +2,21 @@ package comp3111.popnames;
 
 import org.apache.commons.csv.*;
 import edu.duke.*;
-
+import java.text.DecimalFormat;
+/** 
+ *Task6 Program
+ *This is the main class for the Application3 that can generate the score to predict whether the names are matched or not
+ *in specific period.
+ *@author     <a href=mailto:yzhanghf@connect.ust.hk>Yao ZHANG</a>
+ *@version    1.0
+ */
 public class PredictScores {
 	// same as in task0
 	/**
 	 * getFileParser:
-	 * @Description This function will get a "year "parameter from the UI and use it to get the corresponding
+	 * This function will get a "year "parameter from the UI and use it to get the corresponding
 	 * data.
-	 * @param int year;
+	 * @param year: input year
 	 * @return parser: a data file
 	 */
 	public static CSVParser getFileParser(int year) {
@@ -20,10 +27,12 @@ public class PredictScores {
 	// same as in task0
 	/**
 	 * get_oRank:
-	 * @Description This function will get a year parameter "iYOB" and a String iName and a String iGender and use it to get 
+	 * This function will get a year parameter "iYOB" and a String iName and a String iGender and use it to get 
 	 * the rank of name "iName", gender "iGender" in year "iYOB".
-	 * @param int year; String name; String gender
-	 * @return int: rank
+	 * @param iYOB: input year of birth
+	 * @param iName: input name
+	 * @param iGender: input gender
+	 * @return oRank: rank
 	 */
 	public static int get_oRank(int iYOB, String iName, String iGender) {
 		if (iYOB < 1880 || iYOB > 2019) {
@@ -53,10 +62,11 @@ public class PredictScores {
 	
 	/**
 	 * get_oYOB:
-	 * @Description This function will get a year parameter "iYOB" and a String iPreferenceand use it to get 
+	 * This function will get a year parameter "iYOB" and a String iPreference and use it to get 
 	 * preference year of birth.
-	 * @param int iYOB; String iPreference;
-	 * @return int: oYOB
+	 * @param iYOB: input year of birth
+	 * @param iPreference: input preference
+	 * @return oYOB: birth year of mate
 	 */
 	public static int get_oYOB(int iYOB, String iPreference) {
 		int oYOB = iYOB;
@@ -71,10 +81,12 @@ public class PredictScores {
 	
 	/**
 	 * get_oRankMate:
-	 * @Description This function will get a year parameter "oYOB", a String iNameMate, and a String iGenderMate
+	 * This function will get a year parameter "oYOB", a String iNameMate, and a String iGenderMate
 	 * and use them to get the rank of the input mate.
-	 * @param int oYOB; String iNameMate; String iGenderMate
-	 * @return int: oRankMate
+	 * @param oYOB: birth year of mate 
+	 * @param iNameMate: input name of mate 
+	 * @param iGenderMate: input gender of mate
+	 * @return oRankMate: rank of mate 
 	 */
 	public static int get_oRankMate(int oYOB, String iNameMate, String iGenderMate) {
 		if (oYOB < 1880 || oYOB > 2019) {
@@ -104,10 +116,11 @@ public class PredictScores {
 	
 	/**
 	 * get_unique_people:
-	 * @Description This function will take parameters "year" and "gender", and use them to 
+	 * This function will take parameters "year" and "gender", and use them to 
 	 * get the number of names of people with gender "gender" and borned in year "year".
-	 * @param int year; String gender
-	 * @return int: unique_people
+	 * @param year: input year of birth
+	 * @param gender: input gender
+	 * @return unique_people: number of unique people
 	 */
 	public static int get_unique_people(int year, String gender) {
 		int unique_people=0;
@@ -121,16 +134,23 @@ public class PredictScores {
 	
 	/**
 	 * get_oRankMate:
-	 * @Description This function will use rank "oRank" and rank "oRankMate", "iYOB" and "oYOB", and "iGender" and "iMateGender"
+	 *  This function will use rank "oRank" and rank "oRankMate", "iYOB" and "oYOB", and "iGender" and "iMateGender"
 	 * and use them to get the score of the compatibility between you and your mate.
-	 * @param int oRank; int oRankMate, int iYOB, int oYOB, String iGender, String iMateGender
-	 * @return int: oScore
+	 * @param oRank: user rank generated from get_oRank
+	 * @param oRankMate: mate rank generated from get_oRankMate
+	 * @param iYOB: input year of birth
+	 * @param oYOB: birth year of mate
+	 * @param iGender: input gender
+	 * @param iMateGender: input gender of mate
+	 * @return score: compatibility score
 	 */
-	public static double get_oScore(int oRank, int oRankMate, int iYOB, int oYOB, String iGender, String iMateGender) {
+	public static String get_oScore(int oRank, int oRankMate, int iYOB, int oYOB, String iGender, String iMateGender) {
 		int rank_total_1 = get_unique_people(iYOB, iGender);
 		int rank_total_2 = get_unique_people(oYOB, iMateGender);
 		double oScore = (1.0 - Math.abs(((1.0 * oRank - (1.0 * oRankMate))*2)/(rank_total_1+rank_total_2))) * 100;
-		return oScore;
+		DecimalFormat df = new DecimalFormat("#.##");
+		String score = df.format(oScore);
+		return score;
 	}
 	
 }

@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -41,10 +42,31 @@ public class Controller {
 
     @FXML
     private Button buttonSummary;
-    
+
     @FXML
     private Tab tabReport1;
 
+    @FXML
+    private TextField task1TopNum;
+    
+    @FXML
+    private RadioButton task1male;
+    
+    @FXML
+    private RadioButton task1female;
+    
+    @FXML
+    private TextArea task1report;
+    
+    @FXML
+    private TextField task1y1;
+    
+    @FXML
+    private TextField task1y2;
+    
+    @FXML
+    private Button buttonTask1;
+    
     @FXML
     private ToggleGroup T1;
 
@@ -52,7 +74,28 @@ public class Controller {
     private Tab tabReport2;
 
     @FXML
+    private TextArea task2report;
+
+    @FXML
+    private TextField task2name;
+
+    @FXML
+    private RadioButton task2male;
+
+    @FXML
     private ToggleGroup T11;
+
+    @FXML
+    private RadioButton task2female;
+
+    @FXML
+    private TextField task2y2;
+
+    @FXML
+    private TextField task2y1;
+
+    @FXML
+    private Button buttomTask2;
 
     @FXML
     private Tab tabReport3;
@@ -62,16 +105,75 @@ public class Controller {
 
     @FXML
     private Tab tabApp1;
+    
+    @FXML
+    private TextArea App1Report;
+    
+    @FXML
+    private TextField task4DadName;
+    
+    @FXML
+    private TextField task4MomName;
+    
+    @FXML
+    private TextField task4DadYOB;
+    
+    @FXML
+    private TextField task4MomYOB;
+    
+    @FXML
+    private TextField task4VintageYear;
+    
+    @FXML
+    private Button buttonTask4;
 
     @FXML
     private Tab tabApp2;
+
+    @FXML
+    private TextArea task5result;
+
+    @FXML
+    private TextField task5Name;
+
+    @FXML
+    private TextField task5Year;
+
+    @FXML
+    private RadioButton task5male;
+
+    @FXML
+    private ToggleGroup T51;
+
+    @FXML
+    private RadioButton task5female;
+
+    @FXML
+    private RadioButton task5matemale;
+
+    @FXML
+    private ToggleGroup T52;
+
+    @FXML
+    private RadioButton task5matefemale;
+
+    @FXML
+    private RadioButton task5younger;
+
+    @FXML
+    private ToggleGroup T53;
+
+    @FXML
+    private RadioButton task5older;
+
+    @FXML
+    private Button buttontask5;
 
     @FXML
     private Tab tabApp3;
 
     @FXML
     private TextArea textAreaConsole;
-    
 
     
     
@@ -88,6 +190,9 @@ public class Controller {
     
     @FXML
     private ToggleGroup T5;
+    
+    @FXML
+    private TextField task3_textN;
     
     @FXML
     private TextField task3_textYear1;
@@ -172,8 +277,7 @@ public class Controller {
     		oReport = String.format("Rank of %s (female) in year %d is #%d.\n", iNameF, iYear, oRank);
     	textAreaConsole.setText(oReport);
     }
-
-  
+ 
     /**
      *  Task Zero
      *  To be triggered by the "Rank (male)" button on the Task Zero Tab
@@ -228,78 +332,262 @@ public class Controller {
     }
     
     /**
-     *  Task 3
-     *  To be triggered by the "Report" button on the Reporting 3 Tab
-     *  @description This function will get all parameters from the UI and use them to finish the report.
-     *  If any of the inputs are incorrect or invalid, it will return a different report for the users.
-     *  For other illegal input detections, @see NameTrend.java.
-     *  @author Yih CHENG
-     *  @return no return needed
-     */
+     *Task One
+     *To be triggered by the "Report" button on the Reporting1 Tab
+     *This function will get all the parameters from the UI and use them to finish the report.
+     *It will detect some of the illegal inputs here and will then return a different report for the
+     *user. Others detection of illegal inputs are in TopNamesForBirth.java
+     *@author Yao ZHANG
+     *
+    */
     @FXML
-    void task3_getReport() {
-    	String report = "", brief = "";
-    	int year1=Integer.parseInt(task3_textYear1.getText());
-    	int year2=Integer.parseInt(task3_textYear2.getText());
+    void getReport1() {
+    	String Report = "";
     	try {
-    		Integer.parseInt(task3_textYear1.getText());
-    	} catch (NumberFormatException e) {
-    		textAreaConsole.setText("The input is incorrect. Please enter a valid input!");
+    	      Integer.parseInt(task1y1.getText());
+    	      Integer.parseInt(task1y2.getText());
+    	      Integer.parseInt(task1TopNum.getText());
+    	  } catch (NumberFormatException e) {
+    	   textAreaConsole.setText("Please provide legal number!");
+    	   return;
+    	  }
+    	if(task1y1.getText().equals("") || task1y2.getText().equals("") ||task1TopNum.getText().equals("")) {
+    		Report += "Something is missed and please ensure you have finished your input!";
+    		textAreaConsole.setText(Report);
     		return;
     	}
-    	try { 
-    		Integer.parseInt(task3_textYear2.getText());
-    	} catch (NumberFormatException e) {
-    		textAreaConsole.setText("The input is incorrect. Please enter a valid input!");
+    	else if(task1y1.getText().matches(".*\\s.*")|| task1y2.getText().matches(".*\\s.*") ||task1TopNum.getText().matches(".*\\s.*")) {
+    		Report += "There should not be any spaces in your input and please ensure you have typed correctly!";
+    		textAreaConsole.setText(Report);
     		return;
     	}
-
+ 
+    	int year1=Integer.parseInt(task1y1.getText());
+    	int year2=Integer.parseInt(task1y2.getText());
+    	int num=Integer.parseInt(task1TopNum.getText());
     	
     	String gender="";
-    	if(task3_buttonMale.isSelected()){
+    	if(task1male.isSelected()){
     		gender="M";
     	}
     	else{
     		gender="F";
     	}
-    	Vector<String> nameList = NameTrend.getNameList(year1, year2, gender);
-    	if (nameList.size() == 1) {
-    		textAreaConsole.setText(nameList.get(0));
+    	//String Report = String.format("no year %d %d",year1,year2);
+    	Report=TopNamesForBirth.getReport1(year1, year2, num, gender);
+    	textAreaConsole.setText(Report);
+    	return;
+    }
+    
+    /**
+     *Task Two
+     *To be triggered by the "Report" button on the Reporting 2 Tab
+     *This function will get all the parameters from the UI and use them to finish the report.
+     *It will detect some of the illegal inputs here and will then return a different report for the
+     *user. Others detection of illegal inputs 
+     *@author Lan Bo
+     *
+    */
+    @FXML
+    void getReport2() {
+    	if(task2y1.getText().equals("") || task2y2.getText().equals(""))
+    	{
+    		textAreaConsole.setText("Please provide time peroid");
     		return;
     	}
-    	int[][] allRanks = NameTrend.getAllRanks(year1, year2, gender, nameList);
-    	int[][] allDiff = NameTrend.getDifference(year1, year2, gender, allRanks);
-    	String name_rise = NameTrend.getRiseName(nameList, allDiff);
-    	String name_fall = NameTrend.getFallName(nameList, allDiff);
-    	int rise[] = NameTrend.getRise(year1, allRanks, allDiff);
-    	int fall[] = NameTrend.getFall(year1, allRanks, allDiff);
-    	
-    	brief = String.format("%s is found to have shown the largest rise in popularity from rank %d in year %d to rank %d in year %d. "
-    			+ "On the other hand, %s is found to have shown the largest fall in popularity from rank %d in year %d to rank %d "
-    			+ "in year %d.", name_rise, rise[0], rise[1], rise[2], rise[3], name_fall, fall[0], fall[1], fall[2], fall[3]);
-    	
-    	report += "Name             Lowest Rank            Highest Rank              Trend";
-    	report += "\n";
-    	report += "                            [in year]                          [in year]                     ";
-    	report += "\n";
-    	
-    	report += String.format("%s          %d  [ %d ]          %d  [ %d ]          %d ranks up", name_rise, rise[0], rise[1], rise[2], rise[3], rise[4]);
-    	report += "\n";
-    	
-    	report += String.format("%s          %d  [ %d ]          %d  [ %d ]          %d ranks down", name_fall, fall[0], fall[1], fall[2], fall[3], fall[4]);
-    	
-    	task3_textSummary.setText(brief);
-    	textAreaConsole.setText(report);
+    	try {
+    		Integer.parseInt(task2y1.getText());
+    		Integer.parseInt(task2y2.getText());
+		} catch (NumberFormatException e) {
+			textAreaConsole.setText("Please provide legal time input");
+			return;
+		}
+    	int year1=Integer.parseInt(task2y1.getText());
+    	int year2=Integer.parseInt(task2y2.getText());
+    	String name=task2name.getText();
+    	String gender="";
+    	if(task2male.isSelected())
+    	{
+    		gender="M";
+    	}
+    	else {
+    		gender="F";
+    	}
+    	String Report=PopularityofName.getReport(year1, year2, name, gender);
+    	//String Report="";
+    	//Report+=String.format("%d %d %s %s", year1, year2, name, gender);
+    	textAreaConsole.setText(Report);
+    }
+    /**
+     *  Task 3
+     *  To be triggered by the "Report" button on the Reporting 3 Tab
+     *  This function will get all parameters from the UI and use them to finish the report.
+     *  If any of the inputs are incorrect or invalid, it will return a different report for the users.
+     *  For other illegal input detections,
+     *  @author Yih CHENG
+     * 
+     */
+    @FXML
+    void task3_getReport() {
+     String report = "", brief = "";
+     try {
+      Integer.parseInt(task3_textYear1.getText());
+     } catch (NumberFormatException e) {
+      textAreaConsole.setText("The input is incorrect. Please enter a valid input!");
+      return;
+     }
+     try { 
+      Integer.parseInt(task3_textYear2.getText());
+     } catch (NumberFormatException e) {
+      textAreaConsole.setText("The input is incorrect. Please enter a valid input!");
+      return;
+     }
+     try { 
+      Integer.parseInt(task3_textN.getText());
+     } catch (NumberFormatException e) {
+      textAreaConsole.setText("The input N is incorrect. Please enter a valid input!");
+      return;
+     }
+     int year1=Integer.parseInt(task3_textYear1.getText());
+     int year2=Integer.parseInt(task3_textYear2.getText());
+     int N=Integer.parseInt(task3_textN.getText());
+
+     
+     String gender="";
+     if(task3_buttonMale.isSelected()){
+      gender="M";
+     }
+     else{
+      gender="F";
+     }
+     Vector<String> nameList = NameTrend.getNameList(year1, year2, gender, N);
+     if (nameList.size() == 1) {
+    	 report += nameList.get(0);
+    	 brief += "";
+         textAreaConsole.setText(report);
+         task3_textSummary.setText(brief);
+         return;
+     }
+     int[][] allRanks = NameTrend.getAllRanks(year1, year2, gender, nameList);
+     int[][] lowhighranks = NameTrend.getHighestRanks(year1, allRanks, N);
+     String[] trend = NameTrend.grossTrend(lowhighranks);
+     
+     brief = String.format("%d names are found to be maintained at a high level of popularity within Top %d over the period from year %d to year %d.", 
+       nameList.size(), N, year1, year2);
+     
+     report += "Name   Lowest Rank[in year]   Highest Rank[in year]   Gross Trend";
+     report += "\n";
+     for (int i=0; i < nameList.size(); i++) {
+      report += String.format("%s                  %d  [ %d ]                  %d  [ %d ]                 %s", nameList.get(i), lowhighranks[i][0], lowhighranks[i][1], 
+        lowhighranks[i][2], lowhighranks[i][3], trend[i]);
+         report += "\n";
+     }
+
+     task3_textSummary.setText(brief);
+     textAreaConsole.setText(report);
+    }
+    
+    
+    /**
+     *Task Four
+     *To be triggered by the "Recommed" button on the Application1 Tab
+     *This function will get all the parameters from the UI and use them to finish the Recmonmendation.
+     *It will detect some of the illegal inputs here and will then return a different report for the
+     *user. Other detection are in NameRecommendation.java.
+     *@author Yao ZHANG
+     *
+    */
+    @FXML
+    void getNameRecommendation() {
+    	if(task4VintageYear.getText().equals("")) {
+    		task4VintageYear.setText("2019");
+    	}
+    	try {
+    	      Integer.parseInt(task4DadYOB.getText());
+    	      Integer.parseInt(task4MomYOB.getText());
+    	      Integer.parseInt(task4VintageYear.getText());
+    	  } catch (NumberFormatException e) {
+    	   textAreaConsole.setText("Please provide legal number input and no spaces inside numbers is allowed!");
+    	   return;
+    	  }
+    	String Report = "";
+    	if(task4DadName.getText().equals("") || task4MomName.getText().equals("") ||task4DadYOB.getText().equals("") || task4MomYOB.getText().equals("")) {
+    		Report += "Something is missed and please ensure you have finished your input!";
+    		textAreaConsole.setText(Report);
+    		return; //empty input situation.
+    	}
+    	else if(task4DadName.getText().matches(".*\\s.*") || task4MomName.getText().matches(".*\\s.*")) {
+    		Report += "You should not type any white space in the names and please ensure you have finished your input!";
+    		textAreaConsole.setText(Report);
+    		return; //empty input situation.
+    	}
+    	int Dadyear = Integer.parseInt(task4DadYOB.getText());
+    	int Momyear = Integer.parseInt(task4MomYOB.getText());
+    	String Dadname = task4DadName.getText();
+    	String Momname = task4MomName.getText();
+    	int VinYear;
+    	VinYear = Integer.parseInt(task4VintageYear.getText());
+    	Report = NameRecommendation.getBabyName(Dadyear, Momyear, Dadname,Momname, VinYear);
+    	textAreaConsole.setText(Report);
+    }
+    
+    /**
+     *Task Five
+     *To be triggered by the "Predict" button on the Application 2 Tab
+     *This function will get all the parameters from the UI and use them to finish the Prediction.
+     *It will detect some of the illegal inputs here and will then return a different report for the
+     *user. Other detections are in PredictPairs.java.
+     *@author Lan Bo
+     *
+    */ 
+    @FXML
+    void predictmateName() {
+    	if(task5Year.getText().equals(""))
+    	{
+    		textAreaConsole.setText("Please provide your year of birth");
+    		return;
+    	}
+    	try {
+    		Integer.parseInt(task5Year.getText());
+		} catch (NumberFormatException e) {
+			textAreaConsole.setText("Please provide legal time input");
+			return;
+		}
+    	int year=Integer.parseInt(task5Year.getText());
+    	String name=task5Name.getText();
+    	String gender="";
+    	String mategender="";
+    	String preference="";
+    	if(task5male.isSelected()) {
+    		gender="M";
+    	}
+    	else {
+    		gender="F";
+    	}
+    	if(task5matemale.isSelected()) {
+    		mategender="M";
+    	}
+    	else {
+    		mategender="F";
+    	}
+    	if(task5younger.isSelected()) {
+    		preference="Y";
+    	}
+    	else {
+    		preference="O";
+    	}
+    	String matename=PredictPairs.getpairname(year,name,gender,mategender,preference);
+    	textAreaConsole.setText(matename);
     }
     
     /**
      *  Task 6
      *  To be triggered by the "Report" button on the Reporting 6 Tab
-     *  @description This function will get all parameters from the UI and use them to finish the report.
+     *  This function will get all parameters from the UI and use them to finish the report.
      *  If any of the inputs are incorrect or invalid, it will return a different report for the users.
-     *  For other illegal input detections, @see PredictScore.java.
+     *  For other illegal input detections, others are in PredictScore.java.
      *  @author Yih CHENG
-     *  @return no return needed
+     * 
      */
     @FXML
     void task6_getScore() {
@@ -313,13 +601,13 @@ public class Controller {
     	else {
     		iGender = "F";
     	}
-    	int iYOB = Integer.parseInt(task6_textBirthYear.getText());
     	try {
     		Integer.parseInt(task6_textBirthYear.getText());
     	} catch (NumberFormatException e) {
     		textAreaConsole.setText("The input is incorrect. Please enter a valid input!");
     		return;
     	}
+    	int iYOB = Integer.parseInt(task6_textBirthYear.getText());
     	String iNameMate = task6_textMateName.getText();
     	String iGenderMate = "";
     	if(task6_buttonMale2.isSelected()){
@@ -373,12 +661,11 @@ public class Controller {
     		textAreaConsole.setText(report);
     		return;
     	}
-    	double oScore = PredictScores.get_oScore(oRank, oRankMate, iYOB, oYOB, iGender, iGenderMate);
+    	String oScore = PredictScores.get_oScore(oRank, oRankMate, iYOB, oYOB, iGender, iGenderMate);
     	
-    	report += String.format("The compatibility of you, %s, and your mate, %s, is %.2f%%.", iName, iNameMate, oScore);
+    	report += String.format("The compatibility of you, %s, and your mate, %s, is %s%%.", iName, iNameMate, oScore);
     	
     	textAreaConsole.setText(report);
     }
-    
 }
 

@@ -16,9 +16,9 @@ public class NameTrend {
 	// same as in task0
 	/**
 	 * getFileParser:
-	 * @Description This function will get a "year "parameter from the UI and use it to get the corresponding
+	 * This function will get a "year "parameter from the UI and use it to get the corresponding
 	 * data.
-	 * @param int year;
+	 * @param year: input year
 	 * @return parser: a data file
 	 */
 	public static CSVParser getFileParser(int year) {
@@ -28,9 +28,10 @@ public class NameTrend {
 	
 	/**
 	 * getFileParsers:
-	 * @Description This function will get year parameters "year1" & "year2" from the UI and use it to get the corresponding
+	 * This function will get year parameters "year1" and "year2" from the UI and use it to get the corresponding
 	 * data.
-	 * @param int year1; int year2;
+	 * @param year1: input year1
+	 * @param year2: input year2
 	 * @return parsers: the data files
 	 */
 	public static CSVParser [] getFileParsers(int year1, int year2) {  // get data
@@ -44,43 +45,32 @@ public class NameTrend {
 	}
 	
 	/**
-	 * getNameList:
-	 * @Description This function will get year parameters "year1" & "year2" and the gender and use it to get a list of every 
-	 * person's names within "year1" & "year2" and of gender "gender"
-	 * @param int year1; int year2; String gender;
-	 * @return Vector<String>: a list of all names
+	 * get_unique_people:
+	 * This function will take parameters "year" and "gender", and use them to 
+	 * get the number of names of people with gender "gender" and born in year "year".
+	 * @param year: birth year of user
+	 * @param gender: gender of user
+	 * @return unique_people: how many different names in this year
 	 */
-	public static Vector<String> getNameList(int year1, int year2, String gender) {
-		
-		Vector<String> output = new Vector<String>();
-		if (year2 <= year1) {
-			output.add("Wrong input! Please make sure the second year is larger than the first year!");
-			return output;
-		}
-		else if (year1 < 1880 || year2 > 2019) {
-			output.add("Wrong input! Please make sure both years are in range 1880 to 2019!");
-			return output; 
-		}
-		CSVParser[] parsers=getFileParsers(year1,year2);
-		for (int i = 0; i < parsers.length; i++) {  // iterate through every year
-			for (CSVRecord rec : parsers[i]) {  // iterate through every row
-				if (rec.get(1).equals(gender)) {
-					if (output.indexOf(rec.get(0)) == -1) {
-						output.add(rec.get(0));
-					}
-				}
+	public static int get_unique_people(int year, String gender) {
+		int unique_people=0;
+		for (CSVRecord rec : getFileParser(year)) {
+			if (rec.get(1).equals(gender)) {
+				unique_people++;
 			}
 		}
-		return output;
+		return unique_people;
 	}
 	
 	// same as in task0
 	/**
 	 * getRank:
-	 * @Description This function will get a year parameter "year" and a String name and a String gender and use it to get 
+	 * This function will get a year parameter "year" and a String name and a String gender and use it to get 
 	 * the rank of name "name", gender "gender" in year "year".
-	 * @param int year; String name; String gender
-	 * @return int: rank
+	 * @param year: birth year of user
+	 * @param name: name of the user
+	 * @param gender: gender of user	
+	 * @return oRank: rank of the name of the year
 	 */
 	public static int getRank(int year, String name, String gender) {
 		if (year < 1880 || year > 2019) {
@@ -109,11 +99,68 @@ public class NameTrend {
 	}
 	
 	/**
+	 * getNameList:
+	 * This function will get year parameters "year1" and "year2" and the "gender" and Top "N" and use it to get a list of  
+	 * names that remained in rank N within "year1" and "year2" and of gender "gender"
+	 * @param year1: input year1
+	 * @param year2: input year2
+	 * @param gender: input gender
+	 * @param N: input N
+	 * @return output: Vector of names
+	 */
+	public static Vector<String> getNameList(int year1, int year2, String gender, int N) {
+		Vector<String> output = new Vector<String>();
+		Vector<String> output2 = new Vector<String>();
+		if (year2 <= year1) {
+			output.add("Wrong input! Please make sure the second year is larger than the first year!");
+			return output;
+		}
+		else if (year1 < 1880 || year2 > 2019) {
+			output.add("Wrong input! Please make sure both years are in range 1880 to 2019!");
+			return output; 
+		}
+		if (N < 1) {
+			output.add("Wrong input! Please make sure N is larger or equal to 1!");
+			return output;
+		}
+		for (int i= year1; i <= year2; i++) {
+			if (N > get_unique_people(i, gender)) {
+				output.add("Wrong input! Your input N is too large. Please make it smaller!");
+				return output;
+			}
+		}
+		CSVParser[] parsers=getFileParsers(year1,year2);
+		int count = 0;
+		for (CSVRecord rec : parsers[0]) {  // iterate through N row
+			if (count == N) { break; }
+			if (rec.get(1).equals(gender)) {
+				output.add(rec.get(0));
+				output2.add(rec.get(0));
+				count++;
+			}
+		}
+
+		for (int j = 1; j < parsers.length; j++) {  // iterate through every year
+			for (int k = 0; k < N; k++) {
+				if ((getRank(year1+j, output2.get(k), gender) > N) || (getRank(year1+j, output2.get(k), gender)) < 0) {
+					output.removeElement(output2.get(k));
+				}
+			}
+		}
+		
+
+		return output;
+	}
+	
+	/**
 	 * getAllRanks:
-	 * @Description This function will get two year parameters "year1" & "year2", a String gender, and a Vector<String>  
-	 * nameList from the UI and get the rank of every name in nameList within every year "year1" & "year2".
-	 * @param int year1; int year2; String gender; Vector<String> nameList
-	 * @return 2D array: all rank arrays
+	 * This function will get two year parameters "year1" and "year2", a String gender, and a Vector
+	 * nameList from the UI and get the rank of every name in nameList within every year "year1" and "year2".
+	 * @param year1: input year1
+	 * @param year2: input year2
+	 * @param gender: input gender
+	 * @param nameList: nameList from getNameList
+	 * @return rankArray: all rank arrays
 	 */
 	public static int[][] getAllRanks(int year1, int year2, String gender, Vector<String> nameList) {
 		int rankArray[][] = new int[nameList.size()][year2 - year1 + 1];
@@ -127,137 +174,71 @@ public class NameTrend {
 	}
 	
 	/**
-	 * getDifference:
-	 * @Description This function will get two year parameters "year1" & "year2", a String gender, and an int[][] allRanks  
-	 * from the UI and get the rank difference of every rank with respect to each valid ranks in allRanks.
-	 * @param int year1; int year2; String gender; int[][] allRanks;
-	 * @return 2D array: rank difference array
+	 * getHighestRanks:
+	 * This function will get one year parameters "year1", a int[][] rankArray, and a int N
+	 * from the UI and rank data we need for the report.
+	 * @param year1: input year1
+	 * @param rankArray: rankArray from getAllRanks
+	 * @param N: input N
+	 * @return array: data needed for report
 	 */
-	public static int[][] getDifference(int year1, int year2, String gender, int[][] allRanks) {
-		int diffArray[][] = new int[allRanks.length][allRanks[0].length];
-		for (int i = 0; i < allRanks.length; i++) {
-			for (int year = 0; year < year2 - year1 + 1; year++) {
-				if (year == 0) {
-					diffArray[i][year] = 0;
+	public static int[][] getHighestRanks(int year1, int[][] rankArray, int N) {
+		int array[][] = new int[rankArray.length][4];
+		for (int i = 0; i < rankArray.length; i++) {
+			for (int j = 0 ; j < rankArray[0].length; j++) {
+				if (j == 0) {
+					array[i][0] = rankArray[i][j];
+					array[i][1] = year1;
+					array[i][2] = rankArray[i][j];
+					array[i][3] = year1;
 				}
 				else {
-					boolean found = false;
-					for (int j = year-1; j >= 0; j--) {
-						if (allRanks[i][j] > 0 && allRanks[i][year] > 0) {
-							diffArray[i][year] = allRanks[i][year] - allRanks[i][j];
-							found =  true;
-							break;
-						}
+					if (rankArray[i][j] > array[i][0]) {
+						array[i][0] = rankArray[i][j];
+						array[i][1] = year1+j;
 					}
-					if (found == false) { diffArray[i][year] = 0; }
-				}
-			}
-		}
-		return diffArray;
-	}
-	
-	/**
-	 * getFallName:
-	 * @Description This function will get two parameters Vector<String> nameList and int[][] allDiff and find out the name 
-	 * that has fallen the most in ranks according to allDiff array.
-	 * @param Vector<String> nameList; int[][] allDiff
-	 * @return String: nameFall
-	 */
-	public static String getFallName(Vector<String> nameList, int[][] allDiff) {
-		int rankFall = 0;
-		String nameFall = "";
-		for (int i = 0; i < allDiff.length; i++) {
-			for (int j = 0; j < allDiff[0].length; j++) {
-				if (allDiff[i][j] > rankFall) {
-					rankFall = allDiff[i][j];
-					nameFall = nameList.get(i);
-				}
-			}
-		}
-		return nameFall;
-	}
-	
-	/**
-	 * getRiseName:
-	 * @Description This function will get two parameters Vector<String> nameList and int[][] allDiff and find out the name 
-	 * that has risen the most in ranks according to allDiff array.
-	 * @param Vector<String> nameList; int[][] allDiff
-	 * @return String: nameRise
-	 */
-	
-	public static String getRiseName(Vector<String> nameList, int[][] allDiff) {
-		int rankRise = 0;
-		String nameRise = "";
-		for (int i = 0; i < allDiff.length; i++) {
-			for (int j = 0; j < allDiff[0].length; j++) {
-				if (allDiff[i][j] < rankRise) {
-					rankRise = allDiff[i][j];
-					nameRise = nameList.get(i);
-				}
-			}
-		}
-		return nameRise;
-	}
-	
-	/**
-	 * getFall:
-	 * @Description This function will get a "year" parameter, an int[][] allRank parameter, and an int[][] allDiff parameter to 
-	 * find out the data of the year_fall1 and year_fall2 and rank_fall1 and rank_fall2 
-	 * @param int year1, int[][] allRanks, int[][] allDiff
-	 * @return int[]: all the essential numbers needed
-	 */
-	public static int[] getFall(int year1, int[][] allRanks, int[][] allDiff) {
-		int output[] = new int[5];
-		int rankFall = 0;
-		for (int i = 0; i < allDiff.length; i++) {
-			for (int j = 0; j < allDiff[0].length; j++) {
-				if (allDiff[i][j] > rankFall) {
-					rankFall = allDiff[i][j];
-					output[2] = allRanks[i][j];
-					output[3] = year1 + j;
-					
-					for (int k = j - 1; j >= 0; j--) {
-						if (allRanks[i][k] > 0) {
-							output[0] = allRanks[i][k];
-							output[1] = year1 + k;
-							break;
-						}
+					if (rankArray[i][j] < array[i][2]) {
+						array[i][2] = rankArray[i][j];
+						array[i][3] = year1+j;
 					}
 				}
 			}
 		}
-		output[4] = output[2] - output[0];
-		return output;
+		return array;
 	}
 	
 	/**
-	 * getRise:
-	 * @Description This function will get a "year" parameter, an int[][] allRank parameter, and an int[][] allDiff parameter to 
-	 * find out the data of the year_rise1 and year_rise2 and rank_rise1 and rank_rise2 
-	 * @param int year1, int[][] allRanks, int[][] allDiff
-	 * @return int[]: all the essential numbers needed
+	 * grossTrend:
+	 * This function will get an int[][] array and output a String[] containing the trends of every name
+	 * @param array: array from getHighestRanks
+	 * @return output: all Trends
 	 */
-	public static int[] getRise(int year1, int[][] allRanks, int[][] allDiff) {
-		int output[] = new int[5];
-		int rankRise = 0;
-		for (int i = 0; i < allDiff.length; i++) {
-			for (int j = 0; j < allDiff[0].length; j++) {
-				if (allDiff[i][j] < rankRise) {
-					rankRise = allDiff[i][j];
-					output[2] = allRanks[i][j];
-					output[3] = year1 + j;
-					
-					for (int k = j - 1; j >= 0; j--) {
-						if (allRanks[i][k] > 0) {
-							output[0] = allRanks[i][k];
-							output[1] = year1 + k;
-							break;
-						}
-					}
+	public static String[] grossTrend(int[][] array) {
+		String[] output = new String[array.length];
+		for (int i = 0; i < array.length; i++) {
+			if (array[i][1] <= array[i][3]) {
+				if(array[i][2] == array[i][0]) {
+					output[i] = "FLAT";
+				}
+				else if (array[i][0] < array[i][2]) {
+					output[i] = "DOWN";
+				}
+				else {
+					output[i] = "UP";
+				}
+			}
+			else{
+				if(array[i][2] == array[i][0]) {
+					output[i] = "FLAT";
+				}
+				else if (array[i][0] > array[i][2]) {
+					output[i] = "DOWN";
+				}
+				else {
+					output[i] = "UP";
 				}
 			}
 		}
-		output[4] = output[0] - output[2];
 		return output;
 	}
 }

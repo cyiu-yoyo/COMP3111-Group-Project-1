@@ -130,8 +130,8 @@ public class PredictScoreTester {
     	PredictScores a = new PredictScores();
     	int k = a.get_oRank(2018, "David", "M");
     	int j = a.get_oRankMate(2019, "Desire", "F");
-    	double i = a.get_oScore(k, j, 2018, 2019, "M", "F");
-    	assertTrue(i==86.42);
+    	String i = a.get_oScore(k, j, 2018, 2019, "M", "F");
+    	assertEquals(i, "86.42");
     }
 
 }

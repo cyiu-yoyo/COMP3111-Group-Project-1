@@ -76,7 +76,7 @@ public class AnalyzeNames {
 	     int currentRank = 0;
 	     
 	     // For every name entry in the CSV file
-	     for (CSVRecord rec : getFileParser(year)) {
+	     for (CSVRecord rec : getFileParser(year)) { 
 	         // Get its rank if gender matches param
 	         if (rec.get(1).equals(gender)) {
 	             // Get the name whose rank matches param
