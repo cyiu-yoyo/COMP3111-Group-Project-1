@@ -4,6 +4,8 @@ import org.apache.commons.csv.*;
 import edu.duke.*;
 /** 
  *Task1 Program
+ *This is the main class for the Report1 that can generate the top N popular names
+ *in specific period.
  *@author     <a href=mailto:yzhanghf@connect.ust.hk>Yao ZHANG</a>
  *@version    1.0
  */

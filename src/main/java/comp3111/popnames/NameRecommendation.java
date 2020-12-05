@@ -5,6 +5,8 @@ import edu.duke.*;
 
 /** 
  *Task4 Program
+ *Main Class for the Application1 that can generate recommended names for newborn babies based 
+ *on their parents' names and brth year.
  *@author     <a href=mailto:yzhanghf@connect.ust.hk>Yao Zhang</a>
  *@version    1.0
  */
