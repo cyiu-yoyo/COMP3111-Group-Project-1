@@ -505,7 +505,7 @@ public class Controller {
     	try {
     	      Integer.parseInt(task4DadYOB.getText());
     	      Integer.parseInt(task4MomYOB.getText());
-    	      //Integer.parseInt(task4VintageYear.getText());
+    	      Integer.parseInt(task4VintageYear.getText());
     	  } catch (NumberFormatException e) {
     	   textAreaConsole.setText("Please provide legal number input and no spaces inside numbers is allowed!");
     	   return;
