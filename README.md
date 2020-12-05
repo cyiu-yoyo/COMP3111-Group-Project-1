@@ -1,4 +1,4 @@
-Super Team T-34
+Team T-34
 
  1. Bo LAN
  email:blanaa@connect.ust.hk
