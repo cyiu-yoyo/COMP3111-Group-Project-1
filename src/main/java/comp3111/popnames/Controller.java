@@ -433,6 +433,7 @@ public class Controller {
      try {
       Integer.parseInt(task3_textYear1.getText());
      } catch (NumberFormatException e) {
+    	 
       textAreaConsole.setText("The input is incorrect. Please enter a valid input!");
       return;
      }
@@ -463,9 +464,7 @@ public class Controller {
      Vector<String> nameList = NameTrend.getNameList(year1, year2, gender, N);
      if (nameList.size() == 1) {
     	 report += nameList.get(0);
-    	 brief += "";
          textAreaConsole.setText(report);
-         task3_textSummary.setText(brief);
          return;
      }
      int[][] allRanks = NameTrend.getAllRanks(year1, year2, gender, nameList);
@@ -474,7 +473,9 @@ public class Controller {
      
      brief = String.format("%d names are found to be maintained at a high level of popularity within Top %d over the period from year %d to year %d.", 
        nameList.size(), N, year1, year2);
-     
+     report += brief;
+     report += "\n";
+     report += "\n";
      report += "Name   Lowest Rank[in year]   Highest Rank[in year]   Gross Trend";
      report += "\n";
      for (int i=0; i < nameList.size(); i++) {
@@ -482,8 +483,7 @@ public class Controller {
         lowhighranks[i][2], lowhighranks[i][3], trend[i]);
          report += "\n";
      }
-
-     task3_textSummary.setText(brief);
+     
      textAreaConsole.setText(report);
     }
     
