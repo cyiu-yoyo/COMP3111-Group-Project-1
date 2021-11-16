@@ -1,4 +1,4 @@
-## COMP3111 Team T-34
+## This is the group project for COMP3111 2020Fall.
 [https://github.com/blanaa/COMP3111-Group-Project.git](https://github.com/blanaa/COMP3111-Group-Project.git)
 ## 1. Zhang Yao
 > email: [yzhanghf@connect.ust.hk](yzhanghf@connect.ust.hk)  
@@ -18,3 +18,4 @@
 
 ## Required Documents
 All required documents are in [All Documents.pdf](https://github.com/blanaa/COMP3111-Group-Project/blob/master/All%20Documents.pdf) and the javadoc link is in the [doc](https://github.com/blanaa/COMP3111-Group-Project/tree/master/doc) folder
+
